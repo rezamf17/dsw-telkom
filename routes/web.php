@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,8 +22,18 @@ Route::get('/temp', function () {
     return view('layouts/temp');
 });
 
+Route::get('/datatable', function () {
+    return view('datatable');
+});
+
 Route::group(['middleware' => ['auth', 'role:1']], function(){
+// Route::middleware(['auth', 'role:1'])->group(function () {
     Route::get('/home', 'HomeController@admin')->name('admin');
+    // Route::get('/KelolaAkun', 'AdminController@index')->name('KelolaAkun');
+    // Route::get('/KelolaAkun', [AdminController::class, 'index'])->name('KelolaAkun');
+    Route::resource('KelolaAkun', AdminController::class)->names([
+        'index'=> 'KelolaAkun'
+    ]);
 });
 Auth::routes();
 

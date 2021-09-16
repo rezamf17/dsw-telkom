@@ -8,12 +8,16 @@
   <!-- General CSS Files -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-
-  <!-- CSS Libraries -->
+ <link rel="stylesheet" href="{{ asset('style/node_modules/datatables.net-bs4/css/dataTables.bootstrap4.min.css') }}">
+  <link rel="stylesheet" href="{{ asset('style/node_modules/datatables.net-select-bs4/css/select.bootstrap4.min.css') }}">
 
   <!-- Template CSS -->
+  <link rel="stylesheet" href="{{ asset('style/assets/css/style.css') }}">
+  <link rel="stylesheet" href="{{ asset('style/assets/css/components.css') }}">
   <link rel="stylesheet" href="../assets/css/style.css">
   <link rel="stylesheet" href="../assets/css/components.css">
+{{--   <link rel="stylesheet" href="../node_modules/datatables.net-bs4/css/dataTables.bootstrap4.min.css">
+  <link rel="stylesheet" href="../node_modules/datatables.net-select-bs4/css/select.bootstrap4.min.css"> --}}
 </head>
 
 <body>
@@ -247,49 +251,9 @@
             <a href="index.html">St</a>
           </div>
           <ul class="sidebar-menu">
-              <li class="menu-header">Dashboard</li>
-              <li class="nav-item dropdown">
-                <a href="#" class="nav-link has-dropdown"><i class="fas fa-fire"></i><span>Dashboard</span></a>
-                <ul class="dropdown-menu">
-                  <li><a class="nav-link" href="index-0.html">General Dashboard</a></li>
-                  <li><a class="nav-link" href="index.html">Ecommerce Dashboard</a></li>
-                </ul>
-              </li>
+              <li class=""><a class="nav-link" href="{{route('home')}}"><i class="fas fa-fire"></i> <span>Dashboard</span></a></li>
               <li class="menu-header">Starter</li>
-              <li class="nav-item dropdown">
-                <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i> <span>Layout</span></a>
-                <ul class="dropdown-menu">
-                  <li><a class="nav-link" href="layout-default.html">Default Layout</a></li>
-                  <li><a class="nav-link" href="layout-transparent.html">Transparent Sidebar</a></li>
-                  <li><a class="nav-link" href="layout-top-navigation.html">Top Navigation</a></li>
-                </ul>
-              </li>
-              <li class="active"><a class="nav-link" href="blank.html"><i class="far fa-square"></i> <span>Blank</span></a></li>
-              <li class="nav-item dropdown">
-                <a href="#" class="nav-link has-dropdown"><i class="fas fa-th"></i> <span>Bootstrap</span></a>
-                <ul class="dropdown-menu">
-                  <li><a class="nav-link" href="bootstrap-alert.html">Alert</a></li>
-                  <li><a class="nav-link" href="bootstrap-badge.html">Badge</a></li>
-                  <li><a class="nav-link" href="bootstrap-breadcrumb.html">Breadcrumb</a></li>
-                  <li><a class="nav-link" href="bootstrap-buttons.html">Buttons</a></li>
-                  <li><a class="nav-link" href="bootstrap-card.html">Card</a></li>
-                  <li><a class="nav-link" href="bootstrap-carousel.html">Carousel</a></li>
-                  <li><a class="nav-link" href="bootstrap-collapse.html">Collapse</a></li>
-                  <li><a class="nav-link" href="bootstrap-dropdown.html">Dropdown</a></li>
-                  <li><a class="nav-link" href="bootstrap-form.html">Form</a></li>
-                  <li><a class="nav-link" href="bootstrap-list-group.html">List Group</a></li>
-                  <li><a class="nav-link" href="bootstrap-media-object.html">Media Object</a></li>
-                  <li><a class="nav-link" href="bootstrap-modal.html">Modal</a></li>
-                  <li><a class="nav-link" href="bootstrap-nav.html">Nav</a></li>
-                  <li><a class="nav-link" href="bootstrap-navbar.html">Navbar</a></li>
-                  <li><a class="nav-link" href="bootstrap-pagination.html">Pagination</a></li>
-                  <li><a class="nav-link" href="bootstrap-popover.html">Popover</a></li>
-                  <li><a class="nav-link" href="bootstrap-progress.html">Progress</a></li>
-                  <li><a class="nav-link" href="bootstrap-table.html">Table</a></li>
-                  <li><a class="nav-link" href="bootstrap-tooltip.html">Tooltip</a></li>
-                  <li><a class="nav-link" href="bootstrap-typography.html">Typography</a></li>
-                </ul>
-              </li>
+              <li class=""><a class="nav-link" href="{{route('KelolaAkun')}}"><i class="far fa-user"></i> <span>Kelola Data Akun</span></a></li>
               <li class="menu-header">Stisla</li>
               <li class="nav-item dropdown">
                 <a href="#" class="nav-link has-dropdown"><i class="fas fa-th-large"></i> <span>Components</span></a>
@@ -403,6 +367,9 @@
         <section class="section">
           <div class="section-header">
             <h1>@yield('title')</h1>
+            <div class="section-header-breadcrumb">
+              @yield('breadcrumb')
+            </div>
           </div>
 
           <div class="section-body">
@@ -427,13 +394,34 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.nicescroll/3.7.6/jquery.nicescroll.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
-  <script src="../assets/js/stisla.js"></script>
+  <script src="{{ asset('../assets/js/stisla.js') }}"></script>
+<script src="../assets/js/stisla.js"></script>
 
   <!-- JS Libraies -->
+{{--   <script src="../node_modules/datatables/media/js/jquery.dataTables.min.js"></script>
+  <script src="../node_modules/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
+  <script src="../node_modules/datatables.net-select-bs4/js/select.bootstrap4.min.js"></script>
 
   <!-- Template JS File -->
   <script src="../assets/js/scripts.js"></script>
   <script src="../assets/js/custom.js"></script>
-
+ --}}
   <!-- Page Specific JS File -->
-</bod
+  {{-- <script src="../assets/js/page/modules-datatables.js"></script> --}}
+  <!-- JS Libraies -->
+  {{-- <script src="//cdn.datatables.net/1.11.1/js/jquery.dataTables.min.js"></script>
+  <script> 
+    $(document).ready( function () {
+    $('#table-1').DataTable();
+    } );
+  </script> --}}
+  <script src=" {{asset('style/node_modules/datatables/media/js/jquery.dataTables.min.js')}}"></script>
+  <script src="{{asset('style/node_modules/datatables.net-bs4/js/dataTables.bootstrap4.min.js')}}"></script>
+  <script src="{{asset('style/node_modules/datatables.net-select-bs4/js/select.bootstrap4.min.js')}}"></script>
+  <!-- Template JS File -->
+  <script src="{{ asset('style/assets/js/scripts.js') }}"></script>
+  <script src="{{ asset('style/assets/js/custom.js') }}"></script>
+  <script src="{{asset('style/assets/js/page/modules-datatables.js')}}"></script>
+  <!-- Page Specific JS File -->
+</body>
+</html>
