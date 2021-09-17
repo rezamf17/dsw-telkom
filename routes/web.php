@@ -32,7 +32,9 @@ Route::group(['middleware' => ['auth', 'role:1']], function(){
     // Route::get('/KelolaAkun', 'AdminController@index')->name('KelolaAkun');
     // Route::get('/KelolaAkun', [AdminController::class, 'index'])->name('KelolaAkun');
     Route::resource('KelolaAkun', AdminController::class)->names([
-        'index'=> 'KelolaAkun'
+        'index'=> 'KelolaAkun',
+        'store' => 'KelolaAkun',
+        'edit' => 'KelolaAkun/{KelolaAkun}/edit'
     ]);
 });
 Auth::routes();
