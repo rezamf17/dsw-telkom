@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\TargetController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,6 +26,9 @@ Route::get('/temp', function () {
 Route::get('/datatable', function () {
     return view('datatable');
 });
+Route::get('/profile', function () {
+    return view('profile');
+});
 
 Route::group(['middleware' => ['auth', 'role:1']], function(){
 // Route::middleware(['auth', 'role:1'])->group(function () {
@@ -36,7 +40,14 @@ Route::group(['middleware' => ['auth', 'role:1']], function(){
         'store' => 'KelolaAkun',
         'edit' => 'KelolaAkun/{KelolaAkun}/edit'
     ]);
+    Route::resource('KelolaTarget', TargetController::class)->names([
+        'store' => 'KelolaTarget'
+    ]);
 });
+
+// Route::group(['middleware' => ['auth', 'role:3']], function() {
+//     Route::resource('');
+// });
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

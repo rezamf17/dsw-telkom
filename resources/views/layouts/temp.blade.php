@@ -225,7 +225,7 @@
             <div class="d-sm-none d-lg-inline-block">Hi, {{ Auth::user()->name }}</div></a>
             <div class="dropdown-menu dropdown-menu-right">
               <div class="dropdown-title">Logged in 5 min ago</div>
-              <a href="features-profile.html" class="dropdown-item has-icon">
+              <a href="{{url('profile')}}" class="dropdown-item has-icon">
                 <i class="far fa-user"></i> Profile
               </a>
               <a href="features-activities.html" class="dropdown-item has-icon">
@@ -253,8 +253,9 @@
           </div>
           <ul class="sidebar-menu">
               <li class=""><a class="nav-link" href="{{route('home')}}"><i class="fas fa-fire"></i> <span>Dashboard</span></a></li>
-              <li class="menu-header">Starter</li>
+              <li class="menu-header">Kelola</li>
               <li class=""><a class="nav-link" href="{{route('KelolaAkun')}}"><i class="far fa-user"></i> <span>Kelola Data Akun</span></a></li>
+              <li class=""><a class="nav-link" href="{{url('KelolaTarget')}}"><i class="fas fa-bullseye"></i> <span>Kelola Data Target</span></a></li>
               <li class="menu-header">Stisla</li>
               <li class="nav-item dropdown">
                 <a href="#" class="nav-link has-dropdown"><i class="fas fa-th-large"></i> <span>Components</span></a>

@@ -24,5 +24,13 @@ class DatabaseSeeder extends Seeder
             'role' => '1',
             'password' => Hash::make('12345678'),
         ]);
+         DB::table('table_produk')->insert(
+            [
+               'nama_produk' => 'Wifi'
+            ],
+            [
+               'nama_produk' => 'Digital'
+            ]
+     );
     }
 }

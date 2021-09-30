@@ -51,17 +51,17 @@ Kelola Akun
                     @else
                     Staff
                   @endif</td>
-                  <th>
-                    <a href="{{url('KelolaAkun/'.$user->id.'/edit')}}" title="" class="btn btn-success d-inline"><i class="fa fa-edit"></i>Edit</a>
+                  <th style="display: block ruby;">
+                    <a href="{{url('KelolaAkun/'.$user->id.'/edit')}}" title="" class="btn btn-success"><i class="fa fa-edit"></i>Edit</a>
                     <form action="{{url('KelolaAkun', $user->id)}}" method="post" class="d-inline" onsubmit="return confirm('Yakin hapus data?')">
                   @method('delete')
                   @csrf
                   <button type="submit" class="btn btn-danger">
                     <i class="fa fa-trash"></i>Hapus
                   </button>
-                </form>
                   </th>
                 </tr>
+                </form>
                 @endforeach
               </tbody>
             </table>
@@ -79,7 +79,7 @@ Kelola Akun
           <div class="modal-dialog" role="document">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title">Modal title</h5>
+                <h5 class="modal-title">Tambah Data Akun</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
