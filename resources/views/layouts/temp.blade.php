@@ -252,10 +252,18 @@
             <a href="index.html">St</a>
           </div>
           <ul class="sidebar-menu">
+               @if(auth()->user()->role == 1)
               <li class=""><a class="nav-link" href="{{route('home')}}"><i class="fas fa-fire"></i> <span>Dashboard</span></a></li>
               <li class="menu-header">Kelola</li>
               <li class=""><a class="nav-link" href="{{route('KelolaAkun')}}"><i class="far fa-user"></i> <span>Kelola Data Akun</span></a></li>
               <li class=""><a class="nav-link" href="{{url('KelolaTarget')}}"><i class="fas fa-bullseye"></i> <span>Kelola Data Target</span></a></li>
+              @endif
+               @if(auth()->user()->role == 3)
+               <li class=""><a class="nav-link" href="{{route('staff')}}"><i class="fas fa-fire"></i> <span>Dashboard</span></a></li>
+              <li class="menu-header">Kelola</li>
+              <li class=""><a class="nav-link" href="{{route('KelolaProduk')}}"><i class="far fa-user"></i> <span>Kelola Data Produk</span></a></li>
+              <li class=""><a class="nav-link" href="{{url('KelolaTarget')}}"><i class="fas fa-bullseye"></i> <span>Kelola Data Laporan</span></a></li>
+               @endif
               <li class="menu-header">Stisla</li>
               <li class="nav-item dropdown">
                 <a href="#" class="nav-link has-dropdown"><i class="fas fa-th-large"></i> <span>Components</span></a>
@@ -397,6 +405,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.nicescroll/3.7.6/jquery.nicescroll.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
   <script src="{{ asset('style/assets/js/stisla.js') }}"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 {{-- <script src="../assets/js/stisla.js"></script> --}}
 
   <!-- JS Libraies -->

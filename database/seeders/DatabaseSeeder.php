@@ -17,20 +17,38 @@ class DatabaseSeeder extends Seeder
     {
         \App\Models\User::factory(10)->create();
          DB::table('users')->insert([
-            'name' => 'Dendi',
-            'address' => 'Garut',
-            'telp' => '08523525524',
-            'email' => 'dendi@gmail.com',
-            'role' => '1',
-            'password' => Hash::make('12345678'),
-        ]);
-         DB::table('table_produk')->insert(
             [
-               'nama_produk' => 'Wifi'
+               'name' => 'Dendi',
+               'address' => 'Garut',
+               'telp' => '08523525524',
+               'email' => 'dendi@gmail.com',
+               'role' => '1',
+               'password' => Hash::make('123456'),
             ],
             [
-               'nama_produk' => 'Digital'
+               'name' => 'Hiruzen Uchiha Senju Akagami',
+               'address' => 'Konohagakure',
+               'telp' => '08523525524',
+               'email' => 'hiruzen@gmail.com',
+               'role' => '3',
+               'password' => Hash::make('123456'), 
             ]
-     );
+     ]);
+         DB::table('nama_produk')->insert([
+            [
+               'nama' => 'Movin'
+            ],
+            [
+               'nama' => 'Indohome Gamer'
+            ]
+         ]);  
+         DB::table('jenis_produk')->insert([
+            [
+               'jenis' => 'Wifi'
+            ],
+            [
+               'jenis' => 'Digital'
+            ]
+     ]);
     }
 }

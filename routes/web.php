@@ -1,8 +1,11 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\TargetController;
+use App\Http\Controllers\StaffController;
+use App\Http\Controllers\ProdukController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,7 +35,7 @@ Route::get('/profile', function () {
 
 Route::group(['middleware' => ['auth', 'role:1']], function(){
 // Route::middleware(['auth', 'role:1'])->group(function () {
-    Route::get('/home', 'HomeController@admin')->name('admin');
+    Route::get('/home', [HomeController::class, 'index'])->name('home');
     // Route::get('/KelolaAkun', 'AdminController@index')->name('KelolaAkun');
     // Route::get('/KelolaAkun', [AdminController::class, 'index'])->name('KelolaAkun');
     Route::resource('KelolaAkun', AdminController::class)->names([
@@ -44,10 +47,17 @@ Route::group(['middleware' => ['auth', 'role:1']], function(){
         'store' => 'KelolaTarget'
     ]);
 });
+Route::group(['middleware' => ['auth', 'role:3']], function(){
+    Route::get('/staff', [StaffController::class, 'index'])->name('staff');
+    Route::resource('KelolaProduk', ProdukController::class)->names([
+        'index'=> 'KelolaProduk',
+        'store' => 'KelolaProduk',
+    ]);
+});
 
 // Route::group(['middleware' => ['auth', 'role:3']], function() {
 //     Route::resource('');
 // });
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

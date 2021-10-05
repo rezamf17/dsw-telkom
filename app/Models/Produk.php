@@ -7,6 +7,17 @@ use Illuminate\Database\Eloquent\Model;
 
 class Produk extends Model
 {
-    protected $table = 'table_produk';
+    protected $table = 'kelola_produk';
+    protected $guarded = [];
+
+    public function nama()
+    {
+        return $this->belongsTo('App\Models\Nama', 'id_nama_produk');
+    }
+
+    public function jenis()
+    {
+         return $this->belongsTo('App\Models\Jenis', 'id_jenis');
+    }
     use HasFactory;
 }
