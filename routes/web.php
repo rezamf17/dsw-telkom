@@ -53,6 +53,8 @@ Route::group(['middleware' => ['auth', 'role:3']], function(){
         'index'=> 'KelolaProduk',
         'store' => 'KelolaProduk',
     ]);
+    Route::get('Produk/export/', [ProdukController::class, 'export']);
+    Route::post('export/{id}', [ProdukController::class, 'export']);
 });
 
 // Route::group(['middleware' => ['auth', 'role:3']], function() {

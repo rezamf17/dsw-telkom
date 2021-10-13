@@ -15,22 +15,29 @@ Kelola Produk
       <div class="card-header"><h4>Data Produk</h4></div>
       <div class="card-body">
         <a href="{{url('KelolaProduk/create')}}" class="btn btn-primary">Tambah Data</a>
-        @foreach ($nama as $element)
-           <div class="card card-statistic-1">
-          <div class="card-icon bg-danger">
-            <i class="far fa-file"></i>
-          </div>
-          <div class="card-wrap">
-            <div class="card-header">
-              <h4>Nama Produk</h4>
-            </div>
-            <div class="card-body">
-              {{$element->nama}}
-            </div>
-            <a href="{{url('KelolaProduk/'.$element->id)}}" title="">Lihat</a>
-          </div>
-        </div>
-        @endforeach
+        <table class="table table-striped" id="table-1">
+          <thead>
+            <tr>
+              <th>No</th>
+              <th>Nama Produk</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            @foreach ($nama as $element)
+            <tr>
+              <td>{{$loop->iteration}}</td>
+              <td>{{$element->nama}}</td>
+              <th>
+                <a class="btn btn-success" href="{{url('KelolaProduk/'.$element->id)}}" title="">Lihat</a>
+              </th>
+            </tr>
+            @endforeach
+          </tbody>
+        </table>
+
+      </div> 
+
     </div>
   </div>
 </div>

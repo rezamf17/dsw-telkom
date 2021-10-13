@@ -36,10 +36,16 @@ class DatabaseSeeder extends Seeder
      ]);
          DB::table('nama_produk')->insert([
             [
-               'nama' => 'Movin'
+               'nama' => 'MOVIN'
             ],
             [
-               'nama' => 'Indohome Gamer'
+               'nama' => 'INDIHOME GAMER'
+            ],
+            [
+               'nama' => 'OTT'
+            ],
+            [
+               'nama' => 'IH MUSIC'
             ]
          ]);  
          DB::table('jenis_produk')->insert([

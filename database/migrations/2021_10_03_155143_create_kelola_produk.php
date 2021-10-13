@@ -26,7 +26,8 @@ class CreateKelolaProduk extends Migration
             $table->integer('progrev');
             $table->integer('achrev');
             $table->integer('rankrev');
-            $table->timestamps();
+            $table->date('created_at');
+            $table->date('updated_at');
         });
     }
 

@@ -27,6 +27,8 @@ class ProdukSeeder extends Seeder
                'progrev' => 234,
                'achrev' => 234,
                'rankrev' => 3,
+               'created_at' => now(),
+               'updated_at' => now()
 
             ],
             [
@@ -41,6 +43,9 @@ class ProdukSeeder extends Seeder
                'progrev' => 234,
                'achrev' => 234,
                'rankrev' => 3,
+               'created_at' => now(),
+               'updated_at' => now()
+
             ],
             [
                'id_jenis' => 2,
@@ -54,6 +59,8 @@ class ProdukSeeder extends Seeder
                'progrev' => 234,
                'achrev' => 234,
                'rankrev' => 3,
+               'created_at' => now(),
+               'updated_at' => now()
             ],
             [
                'id_jenis' => 2,
@@ -67,6 +74,8 @@ class ProdukSeeder extends Seeder
                'progrev' => 234,
                'achrev' => 234,
                'rankrev' => 3,
+               'created_at' => now(),
+               'updated_at' => now()
             ],
             [
                'id_jenis' => 2,
@@ -80,6 +89,8 @@ class ProdukSeeder extends Seeder
                'progrev' => 234,
                'achrev' => 234,
                'rankrev' => 3,
+               'created_at' => now(),
+               'updated_at' => now()
             ],
             [
                'id_jenis' => 2,
@@ -93,6 +104,8 @@ class ProdukSeeder extends Seeder
                'progrev' => 234,
                'achrev' => 234,
                'rankrev' => 3,
+               'created_at' => now(),
+               'updated_at' => now()
             ],
             [
                'id_jenis' => 2,
@@ -106,6 +119,8 @@ class ProdukSeeder extends Seeder
                'progrev' => 234,
                'achrev' => 234,
                'rankrev' => 3,
+               'created_at' => now(),
+               'updated_at' => now()
             ],
 
          ]);    
