@@ -21,11 +21,9 @@ class CreateKelolaProduk extends Migration
             $table->integer('tgt');
             $table->integer('psbln');
             $table->integer('ach');
-            $table->integer('rank');
             $table->integer('tgtrev');
             $table->integer('progrev');
             $table->integer('achrev');
-            $table->integer('rankrev');
             $table->date('created_at');
             $table->date('updated_at');
         });

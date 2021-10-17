@@ -8,6 +8,7 @@ use App\Models\Nama;
 use App\Models\Jenis;
 use App\Exports\ProdukExport;
 use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Facades\DB;
 
 class ProdukController extends Controller
 {
@@ -19,9 +20,10 @@ class ProdukController extends Controller
     public function index()
     {
         $produk = Produk::all();
+        $produk_id = Produk::get();
         $produkcount = Produk::where('id_nama_produk', 1)->count();
         $nama = Nama::all();
-        return view ('staff.KelolaProduk', compact('produk', 'nama', 'produkcount'));
+        return view ('staff.KelolaProduk', compact('produk', 'nama', 'produkcount', 'produk_id'));
     }
 
     /**
@@ -53,17 +55,21 @@ class ProdukController extends Controller
          $tgt = $request->tgt[$row];
          $tgtrev = $request->tgtrev[$row];
          $progrev = $request->progrev[$row];
+         $ach = $psbln / $tgt * 100;
+         $rank = collect([$tgt]);
+         $sorted = $rank->sortDesc();
+
          $produk->id_jenis = $request->id_jenis[0];
          $produk->id_nama_produk = $request->id_nama_produk[0];
          $produk->witel = $request->witel[$row];
          $produk->tgt = $tgt;
          $produk->psbln = $psbln;
-         $produk->ach = $tgt / $psbln;
-         $produk->rank = 4;
+         $produk->ach = $ach;
          $produk->tgtrev = $tgtrev;
          $produk->progrev = $progrev;
-         $produk->achrev = $tgtrev / $progrev;
-         $produk->rankrev = 4;
+         $produk->achrev = $progrev / $tgtrev * 100;
+
+         // return $produk;
          $produk->save();
      }
         // return  $request->witel;
@@ -140,30 +146,88 @@ class ProdukController extends Controller
         return back()->with('success', 'Data produk berhasil dihapus!');
     }
 
-    public function export(Request $request, $id) 
+    public function viewExport(Request $request, $id)
     {
         $time = $request->time;
-        $produk = Produk::where('id_nama_produk', $id)->where('created_at', $time)->where('witel', 'not like', 'TREG%')->get();
+        $produk_query = DB::table('kelola_produk')
+                ->select('id_nama_produk', 'witel', 'tgt', 'psbln', 'ach', 'tgtrev', 'progrev', 'achrev')
+                ->selectRaw('RANK() OVER(ORDER BY ach DESC) AS `rank`')
+                ->selectRaw('RANK() OVER(ORDER BY achrev DESC) AS `rankrev`')
+                ->groupBy('id_nama_produk', 'witel', 'tgt', 'psbln', 'ach', 'tgtrev', 'progrev', 'achrev')
+                ->where('id_nama_produk', $id)
+                ->where('created_at', $time)
+                ->where('witel', 'not like', 'TREG%')
+                ->get();
         $nama = Produk::where('id_nama_produk', $id)->first();
         $sumtgt =  Produk::where('id_nama_produk', $id)->where('created_at', $time)->sum('tgt');
         $sumpsbln =  Produk::where('id_nama_produk', $id)->where('created_at', $time)->sum('psbln');
-        $sumach = round($sumtgt / $sumpsbln); 
+        $sumach = round($sumtgt / $sumpsbln * 100); 
         $sumtgtrev = Produk::where('id_nama_produk', $id)->where('created_at', $time)->sum('tgtrev');
         $sumprogrev = Produk::where('id_nama_produk', $id)->where('created_at', $time)->sum('progrev');
-        $sumachrev = round($sumtgtrev / $sumprogrev);
-        $treg = Produk::where('id_nama_produk', $id)->where('created_at', $time)->where('witel', 'like', 'TREG%')->get();
-        return view ('staff.LaporanProduk', compact(
-            'produk',
+        $sumachrev = round($sumtgtrev / $sumprogrev * 100);
+        $treg_query = DB::table('kelola_produk')
+                ->select('id_nama_produk', 'witel', 'tgt', 'psbln', 'ach', 'tgtrev', 'progrev', 'achrev')
+                ->selectRaw('RANK() OVER(ORDER BY ach DESC) AS `rank`')
+                ->selectRaw('RANK() OVER(ORDER BY achrev DESC) AS `rankrev`')
+                ->groupBy('id_nama_produk', 'witel', 'tgt', 'psbln', 'ach', 'tgtrev', 'progrev', 'achrev')
+                ->where('id_nama_produk', $id)
+                ->where('created_at', $time)
+                ->where('witel', 'like', 'TREG%')
+                ->get();
+        $produk_id = Produk::where('id_nama_produk', $id)->first();
+        return view ('staff.ViewExport', compact(
+            'produk_query',
             'nama',
             'time', 
             'sumtgt',
-            'treg', 
+            'treg_query', 
             'sumpsbln', 
             'sumach', 
             'sumtgtrev',
             'sumprogrev',
-            'sumachrev'));
-        // return Excel::download(new ProdukExport($id, $request, $time, $produk, $nama, $sumtgt, $sumpsbln, $sumach, $sumtgtrev, $sumprogrev, $sumachrev ), 'LaporanProduk'.$time.'.xlsx');
-        // return $request;
+            'sumachrev',
+            'produk_id'));
+    }
+
+    public function export(Request $request, $id) 
+    {
+        $time = $request->time;
+        $produk_query = DB::table('kelola_produk')
+                ->select('id_nama_produk', 'witel', 'tgt', 'psbln', 'ach', 'tgtrev', 'progrev', 'achrev')
+                ->selectRaw('RANK() OVER(ORDER BY ach DESC) AS `rank`')
+                ->selectRaw('RANK() OVER(ORDER BY achrev DESC) AS `rankrev`')
+                ->groupBy('id_nama_produk', 'witel', 'tgt', 'psbln', 'ach', 'tgtrev', 'progrev', 'achrev')
+                ->where('id_nama_produk', $id)
+                ->where('created_at', $time)
+                ->where('witel', 'not like', 'TREG%')
+                ->get();
+        $nama = Produk::where('id_nama_produk', $id)->first();
+        $sumtgt =  Produk::where('id_nama_produk', $id)->where('created_at', $time)->sum('tgt');
+        $sumpsbln =  Produk::where('id_nama_produk', $id)->where('created_at', $time)->sum('psbln');
+        $sumach = round($sumtgt / $sumpsbln * 100); 
+        $sumtgtrev = Produk::where('id_nama_produk', $id)->where('created_at', $time)->sum('tgtrev');
+        $sumprogrev = Produk::where('id_nama_produk', $id)->where('created_at', $time)->sum('progrev');
+        $sumachrev = round($sumtgtrev / $sumprogrev * 100);
+        $treg_query = DB::table('kelola_produk')
+                ->select('id_nama_produk', 'witel', 'tgt', 'psbln', 'ach', 'tgtrev', 'progrev', 'achrev')
+                ->selectRaw('RANK() OVER(ORDER BY ach DESC) AS `rank`')
+                ->selectRaw('RANK() OVER(ORDER BY achrev DESC) AS `rankrev`')
+                ->groupBy('id_nama_produk', 'witel', 'tgt', 'psbln', 'ach', 'tgtrev', 'progrev', 'achrev')
+                ->where('id_nama_produk', $id)
+                ->where('created_at', $time)
+                ->where('witel', 'like', 'TREG%')
+                ->get();
+        // return view ('staff.LaporanProduk', compact(
+        //     'produk_query',
+        //     'nama',
+        //     'time', 
+        //     'sumtgt',
+        //     'treg_query', 
+        //     'sumpsbln', 
+        //     'sumach', 
+        //     'sumtgtrev',
+        //     'sumprogrev',
+        //     'sumachrev'));
+        return Excel::download(new ProdukExport($id, $request, $time, $produk_query, $nama, $sumtgt, $sumpsbln, $sumach, $sumtgtrev, $sumprogrev, $sumachrev, $treg_query ), 'LaporanProduk'.$nama->nama->nama.$time.'.xlsx');
     }
 }

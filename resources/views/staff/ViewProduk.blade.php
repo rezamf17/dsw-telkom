@@ -32,12 +32,10 @@ Lihat Produk
                   <th rowspan="2">NO</th>
                   <th rowspan="2">WITEL</th>
                   <th colspan="3" class="text-center">SALES</th>
-                  <th rowspan="2">RANK</th>
                   <th rowspan="2">TGT REV</th>
                   <th rowspan="2">PROGREV</th>
                   <th rowspan="2">ACH REV</th>
                   <th rowspan="2">TANGGAL</th>
-                  <th rowspan="2">RANK REV</th>
                   <th rowspan="2">ACTION</th>
                 </tr>
                 <tr>
@@ -54,12 +52,10 @@ Lihat Produk
                   <td>{{$element->tgt}}</td>
                   <td>{{$element->psbln}}</td>
                   <td>{{$element->ach}}%</td>
-                  <td>{{$element->rank}}</td>
                   <td>{{$element->tgtrev}}</td>
                   <td>{{$element->progrev}}</td>
                   <td>{{$element->achrev}}%</td>
                   <td>{{$element->created_at->format('j F, Y')}}</td>
-                  <td>{{$element->rankrev}}</td>
                   <th>
                      <a href="{{ url('KelolaProduk/'.$element->id.'/edit') }}" title="" class="btn btn-success"><i class="fa fa-edit"></i>Edit</a>
                     <form action="{{ url('KelolaProduk/'.$element->id) }}" method="post" class="d-inline" onsubmit="return confirm('Yakin hapus data?')">
@@ -92,13 +88,13 @@ Lihat Produk
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">Tambah Data Target</h5>
+        <h5 class="modal-title">Buat Laporan</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        <form action="{{url('export/'.$produk_id->id_nama_produk)}}" method="post" accept-charset="utf-8">
+        <form action="{{url('KelolaProduk/viewExport/'.$produk_id->id_nama_produk)}}" method="post" accept-charset="utf-8">
           @csrf
           <div class="form-group">
             Pilih Tanggal Laporan

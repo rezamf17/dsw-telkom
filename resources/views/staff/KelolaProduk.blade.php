@@ -15,6 +15,7 @@ Kelola Produk
       <div class="card-header"><h4>Data Produk</h4></div>
       <div class="card-body">
         <a href="{{url('KelolaProduk/create')}}" class="btn btn-primary">Tambah Data</a>
+        {{-- {{$produk_id->id_nama_produk}} --}}
         <table class="table table-striped" id="table-1">
           <thead>
             <tr>
@@ -29,7 +30,11 @@ Kelola Produk
               <td>{{$loop->iteration}}</td>
               <td>{{$element->nama}}</td>
               <th>
+                @if(DB::table('kelola_produk')->where('id_nama_produk', $element->id)->doesntExist())
+                Data Belum Ada
+                @else
                 <a class="btn btn-success" href="{{url('KelolaProduk/'.$element->id)}}" title="">Lihat</a>
+                @endif
               </th>
             </tr>
             @endforeach

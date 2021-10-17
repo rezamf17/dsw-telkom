@@ -22,11 +22,9 @@ class ProdukSeeder extends Seeder
                'tgt' => 2447,
                'psbln' => 193,
                'ach' => 0,
-               'rank' => 1,
                'tgtrev' => 234,
                'progrev' => 234,
                'achrev' => 234,
-               'rankrev' => 3,
                'created_at' => now(),
                'updated_at' => now()
 
@@ -38,11 +36,9 @@ class ProdukSeeder extends Seeder
                'tgt' => 2447,
                'psbln' => 193,
                'ach' => 0,
-               'rank' => 1,
                'tgtrev' => 234,
                'progrev' => 234,
                'achrev' => 234,
-               'rankrev' => 3,
                'created_at' => now(),
                'updated_at' => now()
 
@@ -54,11 +50,9 @@ class ProdukSeeder extends Seeder
                'tgt' => 2447,
                'psbln' => 193,
                'ach' => 0,
-               'rank' => 1,
                'tgtrev' => 234,
                'progrev' => 234,
                'achrev' => 234,
-               'rankrev' => 3,
                'created_at' => now(),
                'updated_at' => now()
             ],
@@ -69,11 +63,9 @@ class ProdukSeeder extends Seeder
                'tgt' => 2447,
                'psbln' => 193,
                'ach' => 0,
-               'rank' => 1,
                'tgtrev' => 234,
                'progrev' => 234,
                'achrev' => 234,
-               'rankrev' => 3,
                'created_at' => now(),
                'updated_at' => now()
             ],
@@ -84,11 +76,9 @@ class ProdukSeeder extends Seeder
                'tgt' => 2447,
                'psbln' => 193,
                'ach' => 0,
-               'rank' => 1,
                'tgtrev' => 234,
                'progrev' => 234,
                'achrev' => 234,
-               'rankrev' => 3,
                'created_at' => now(),
                'updated_at' => now()
             ],
@@ -99,11 +89,9 @@ class ProdukSeeder extends Seeder
                'tgt' => 2447,
                'psbln' => 193,
                'ach' => 0,
-               'rank' => 1,
                'tgtrev' => 234,
                'progrev' => 234,
                'achrev' => 234,
-               'rankrev' => 3,
                'created_at' => now(),
                'updated_at' => now()
             ],
@@ -114,11 +102,9 @@ class ProdukSeeder extends Seeder
                'tgt' => 2447,
                'psbln' => 193,
                'ach' => 0,
-               'rank' => 1,
                'tgtrev' => 234,
                'progrev' => 234,
                'achrev' => 234,
-               'rankrev' => 3,
                'created_at' => now(),
                'updated_at' => now()
             ],

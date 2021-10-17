@@ -1,6 +1,7 @@
 <table>
     <thead>
       <tr>
+        <th></th>
         <th>{{$nama->nama->nama}}</th>
         <th>{{$nama->created_at->format('j F, Y')}}</th>
       </tr>
@@ -21,7 +22,7 @@
       </tr>
   </thead>
   <tbody>
-    @foreach($produk as $element)
+    @foreach($produk_query as $element)
     <tr>
         <td>{{ $loop->iteration }}</td>
         <td>{{$element->witel}}</td>
@@ -66,7 +67,7 @@
       </tr>
   </thead>
   <tbody>
-      @foreach ($treg as $element)
+      @foreach ($treg_query as $element)
         <tr>
         <td>{{ $loop->iteration }}</td>
         <td>{{$element->witel}}</td>

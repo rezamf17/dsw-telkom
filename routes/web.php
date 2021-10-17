@@ -54,6 +54,7 @@ Route::group(['middleware' => ['auth', 'role:3']], function(){
         'store' => 'KelolaProduk',
     ]);
     Route::get('Produk/export/', [ProdukController::class, 'export']);
+    Route::post('KelolaProduk/viewExport/{id}', [ProdukController::class, 'viewExport']);
     Route::post('export/{id}', [ProdukController::class, 'export']);
 });
 
