@@ -6,6 +6,8 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\TargetController;
 use App\Http\Controllers\StaffController;
 use App\Http\Controllers\ProdukController;
+use App\Http\Controllers\LaporanController;
+use App\Http\Controllers\NamaProdukController;
 
 /*
 |--------------------------------------------------------------------------
@@ -53,6 +55,8 @@ Route::group(['middleware' => ['auth', 'role:3']], function(){
         'index'=> 'KelolaProduk',
         'store' => 'KelolaProduk',
     ]);
+    Route::resource('KelolaLaporan', LaporanController::class);
+    Route::resource('NamaProduk', NamaProdukController::class);
     Route::get('Produk/export/', [ProdukController::class, 'export']);
     Route::post('KelolaProduk/viewExport/{id}', [ProdukController::class, 'viewExport']);
     Route::post('export/{id}', [ProdukController::class, 'export']);

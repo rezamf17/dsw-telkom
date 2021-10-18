@@ -124,11 +124,9 @@ class ProdukController extends Controller
         $produk->tgt = $tgt;
         $produk->psbln = $psbln;
         $produk->ach = $tgt / $psbln;
-        $produk->rank = 4;
         $produk->tgtrev = $tgtrev;
         $produk->progrev = $progrev;
         $produk->achrev = $tgtrev / $progrev;
-        $produk->rankrev = 4;
         $produk->save();
         return redirect('KelolaProduk/'.$request->id_nama_produk)->with('success', 'Produk Berhasil Diupdate!');
     }

@@ -262,7 +262,9 @@
                <li class=""><a class="nav-link" href="{{route('staff')}}"><i class="fas fa-fire"></i> <span>Dashboard</span></a></li>
               <li class="menu-header">Kelola</li>
               <li class=""><a class="nav-link" href="{{route('KelolaProduk')}}"><i class="far fa-user"></i> <span>Kelola Data Produk</span></a></li>
-              <li class=""><a class="nav-link" href="{{url('KelolaTarget')}}"><i class="fas fa-bullseye"></i> <span>Kelola Data Laporan</span></a></li>
+              <li class=""><a class="nav-link" href="{{url('KelolaLaporan')}}"><i class="fas fa-bullseye"></i> <span>Kelola Data Laporan</span></a></li>
+              <li class="menu-header">Produk</li>
+              <li class=""><a class="nav-link" href="{{url('NamaProduk')}}"><i class="fas fa-box"></i> <span>Nama Produk</span></a></li>
                @endif
               <li class="menu-header">Stisla</li>
               <li class="nav-item dropdown">
