@@ -32,6 +32,14 @@ class DatabaseSeeder extends Seeder
                'email' => 'hiruzen@gmail.com',
                'role' => '3',
                'password' => Hash::make('123456'), 
+            ],
+            [
+               'name' => 'Uzumaki Bayu',
+               'address' => 'Konohagakure',
+               'telp' => '2434534134',
+               'email' => 'uzumaki@gmail.com',
+               'role' => '2',
+               'password' => Hash::make('123456'), 
             ]
      ]);
          DB::table('nama_produk')->insert([
