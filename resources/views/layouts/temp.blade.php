@@ -246,11 +246,9 @@
       <div class="main-sidebar">
         <aside id="sidebar-wrapper">
           <div class="sidebar-brand">
-            <a href="index.html">Stisla</a>
+            <a href="index.html">Sistem DSW</a>
           </div>
-          <div class="sidebar-brand sidebar-brand-sm">
-            <a href="index.html">St</a>
-          </div>
+      
           <ul class="sidebar-menu">
                @if(auth()->user()->role == 1)
               <li class=""><a class="nav-link" href="{{route('home')}}"><i class="fas fa-fire"></i> <span>Dashboard</span></a></li>
@@ -259,7 +257,7 @@
               <li class=""><a class="nav-link" href="{{url('KelolaTarget')}}"><i class="fas fa-bullseye"></i> <span>Kelola Data Target</span></a></li>
               @endif
               @if(auth()->user()->role == 2)
-               <li class=""><a class="nav-link" href="{{route('staff')}}"><i class="fas fa-fire"></i> <span>Dashboard</span></a></li>
+               <li class=""><a class="nav-link" href="{{route('manager')}}"><i class="fas fa-fire"></i> <span>Dashboard</span></a></li>
               <li class="menu-header">Kelola</li>
               <li class=""><a class="nav-link" href="{{url('KelolaLaporan')}}"><i class="fas fa-bullseye"></i> <span>Kelola Data Laporan</span></a></li>
                @endif

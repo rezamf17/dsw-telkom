@@ -54,14 +54,16 @@ Route::group(['middleware' => ['auth', 'role:2']], function(){
     Route::get('/manager', [ManagerController::class, 'index'])->name('manager');
     Route::resource('KelolaLaporan', LaporanController::class);
     Route::post('KelolaLaporan/viewExport/{id}', [LaporanController::class, 'viewExport']);
+    Route::post('exportLaporan/{id}', [LaporanController::class, 'export']);
 });
-Route::group(['middleware' => ['auth', 'role:3']], function(){
+Route::group(['middleware' => ['auth', 'role:3,2']], function(){
     Route::get('/staff', [StaffController::class, 'index'])->name('staff');
     Route::resource('KelolaProduk', ProdukController::class)->names([
         'index'=> 'KelolaProduk',
         'store' => 'KelolaProduk',
     ]);
-
+     Route::resource('KelolaLaporan', LaporanController::class);
+    Route::post('KelolaLaporan/viewExport/{id}', [LaporanController::class, 'viewExport']);
     Route::resource('NamaProduk', NamaProdukController::class);
     Route::get('Produk/export/', [ProdukController::class, 'export']);
     Route::post('KelolaProduk/viewExport/{id}', [ProdukController::class, 'viewExport']);

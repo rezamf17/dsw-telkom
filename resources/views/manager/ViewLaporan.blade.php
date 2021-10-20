@@ -19,12 +19,14 @@ Lihat Laporan
           <div class="card-header">
             <h4>Lihat Laporan {{$laporan_id->nama->nama}}</h4>
             <div class="float-right" style="margin-left: 80%;">
-              <a href="{{url('KelolaProduk')}}" class="btn btn-secondary">Kembali</a>
+              <a href="{{url('KelolaLaporan')}}" class="btn btn-secondary">Kembali</a>
             </div>
           </div>
           <div class="card-body">
+            @if(auth()->user()->role == 3)
             <button class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">Buat Laporan Ke Excel</button>
             <a href="{{url('KelolaLaporan/create')}}" class="btn btn-primary">Tambah Data Laporan</a>
+            @endif
             <div class="table-responsive">
               <table class="table table-striped" id="table-1">
                 <thead>
@@ -39,7 +41,9 @@ Lihat Laporan
                   <th>PROGREV</th>
                   <th>ACH REV</th>
                   <th>TANGGAL</th>
+                  @if(auth()->user()->role == 3)
                   <th>ACTION</th>
+                  @endif
                 </tr>
               </thead>
               <tbody>
@@ -55,6 +59,7 @@ Lihat Laporan
                   <td>{{$element->progrev}}</td>
                   <td>{{$element->achrev}}%</td>
                   <td>{{$element->created_at->format('j F, Y')}}</td>
+                  @if(auth()->user()->role == 3)
                   <th>
                      <a href="{{ url('KelolaLaporan/'.$element->id.'/edit') }}" class="btn btn-success"><i class="fa fa-edit"></i>Edit</a>
                     <form action="{{ url('KelolaLaporan/'.$element->id) }}" method="post" class="d-inline" onsubmit="return confirm('Yakin hapus data?')">
@@ -65,6 +70,7 @@ Lihat Laporan
                   </button>
                   </th>
                 </form>
+                @endif
                 </tr>
                 @endforeach
               </tbody>

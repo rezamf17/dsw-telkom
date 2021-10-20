@@ -12,9 +12,11 @@ Kelola Laporan
 <section class="section">
   <div class="section-body">
     <div class="card">
-      <div class="card-header"><h4>Data Produk</h4></div>
+      <div class="card-header"><h4>Data Laporan</h4></div>
       <div class="card-body">
+        @if(auth()->user()->role == 3)
         <a href="{{url('KelolaLaporan/create')}}" class="btn btn-primary">Tambah Data</a>
+        @endif
         <table class="table table-striped">
           <thead>
             <tr>

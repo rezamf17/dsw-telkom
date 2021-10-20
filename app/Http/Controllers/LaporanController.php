@@ -7,7 +7,9 @@ use App\Models\Nama;
 use App\Models\Jenis;
 use App\Models\Laporan;
 use App\Models\Produk;
+use App\Exports\LaporanExport;
 use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Facades\Excel;
 
 class LaporanController extends Controller
 {
@@ -168,5 +170,39 @@ class LaporanController extends Controller
             'sumprogrev',
             'sumachrev',
             'laporan_id'));
+    }
+
+    public function export(Request $request, $id)
+    {
+        $time = $request->time;
+        $laporan_query = DB::table('kelola_laporan')
+                ->select('id_nama_produk', 'witel', 'tgtmtd', 'realmtd', 'ach', 'shrtge', 'tgtrev', 'progrev', 'achrev')
+                ->selectRaw('RANK() OVER(ORDER BY ach DESC) AS `rank`')
+                ->selectRaw('RANK() OVER(ORDER BY achrev DESC) AS `rankrev`')
+                ->groupBy('id_nama_produk', 'witel', 'tgtmtd', 'realmtd', 'ach', 'shrtge', 'tgtrev', 'progrev', 'achrev')
+                ->where('id_nama_produk', $id)
+                ->where('created_at', $time)
+                ->where('witel', 'not like', 'TREG%')
+                ->get();
+        $nama = Laporan::where('id_nama_produk', $id)->first();
+        $laporan_id = Laporan::where('id_nama_produk', $id)->first();
+        $sumtgtmtd =  Laporan::where('id_nama_produk', $id)->where('created_at', $time)->sum('tgtmtd');
+        $sumrealmtd =  Laporan::where('id_nama_produk', $id)->where('created_at', $time)->sum('realmtd');
+        $sumach = round($sumtgtmtd / $sumrealmtd * 100); 
+        $sumtgtrev = Laporan::where('id_nama_produk', $id)->where('created_at', $time)->sum('tgtrev');
+        $sumprogrev = Laporan::where('id_nama_produk', $id)->where('created_at', $time)->sum('progrev');
+        $sumachrev = round($sumtgtrev / $sumprogrev * 100);
+        return Excel::download(new LaporanExport($id, $request, $time, $laporan_query, $nama, $sumtgtmtd, $sumrealmtd, $sumach, $sumtgtrev, $sumprogrev, $sumachrev ), 'ReportLaporan'.$nama->nama->nama.$time.'.xlsx');
+        // return view ('manager.LaporanReport', compact(
+        //     'laporan_query',
+        //     'nama',
+        //     'time', 
+        //     'sumtgtmtd', 
+        //     'sumrealmtd', 
+        //     'sumach', 
+        //     'sumtgtrev',
+        //     'sumprogrev',
+        //     'sumachrev',
+        //     'laporan_id'));
     }
 }

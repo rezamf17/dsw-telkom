@@ -13,7 +13,12 @@ Edit Data Laporan
 
   <div class="section-body">
     <div class="card">
-      <div class="card-header"></div>
+      <div class="card-header">
+        <h4>Edit Data Laporan</h4>
+        <div class="float-right" style="margin-left: 80%;">
+              <a href="{{url('KelolaLaporan')}}" class="btn btn-secondary">Kembali</a>
+        </div>
+      </div>
       <div class="card-body">
         <form action="{{ url('KelolaLaporan/'.$laporan->id) }}" method="POST">
           @method('PUT')

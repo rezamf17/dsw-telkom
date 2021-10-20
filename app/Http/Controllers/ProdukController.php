@@ -226,6 +226,6 @@ class ProdukController extends Controller
         //     'sumtgtrev',
         //     'sumprogrev',
         //     'sumachrev'));
-        return Excel::download(new ProdukExport($id, $request, $time, $produk_query, $nama, $sumtgt, $sumpsbln, $sumach, $sumtgtrev, $sumprogrev, $sumachrev, $treg_query ), 'LaporanProduk'.$nama->nama->nama.$time.'.xlsx');
+        return Excel::download(new ProdukExport($id, $request, $time, $produk_query, $nama, $sumtgt, $sumpsbln, $sumach, $sumtgtrev, $sumprogrev, $sumachrev, $treg_query ), 'ReportProduk'.$nama->nama->nama.$time.'.xlsx');
     }
 }

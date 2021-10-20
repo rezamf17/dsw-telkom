@@ -7,7 +7,7 @@ Report
   <div class="card">
     <div class="card-header"><h4>Report</h4>
       <div class="float-right" style="margin-left: 80%;">
-        <a href="{{url('KelolaProduk/'.$nama->id_nama_produk)}}" class="btn btn-secondary">Kembali</a>
+        <a href="{{url('KelolaLaporan/'.$nama->id_nama_produk)}}" class="btn btn-secondary">Kembali</a>
       </div>
     </div>
     <div class="card-body">
@@ -60,7 +60,7 @@ Report
 
   </div>
   <div class="card-footer">
-    <form action="" method="post" accept-charset="utf-8">
+    <form action="{{ url('exportLaporan/'.$nama->id) }}" method="post" accept-charset="utf-8">
       @csrf
       <input style="display: none;" type="text" name="time" value="{{$nama->created_at}}">
       <button type="submit" class="btn btn-primary">Report Excel</button>
