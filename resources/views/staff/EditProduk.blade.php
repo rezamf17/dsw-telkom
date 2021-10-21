@@ -13,7 +13,12 @@ Edit Data Produk
 
   <div class="section-body">
     <div class="card">
-      <div class="card-header"></div>
+      <div class="card-header">
+        <h4>Edit Data Produk</h4>
+        <div class="float-right" style="margin-left: 80%;">
+              <a href="{{url('KelolaProduk/'.$produk->id_nama_produk)}}" class="btn btn-secondary">Kembali</a>
+        </div>
+      </div>
       <div class="card-body">
         <form action="{{ url('KelolaProduk/'.$produk->id) }}" method="POST">
           @method('PUT')
@@ -23,7 +28,7 @@ Edit Data Produk
             <select name="id_jenis" class="form-control form-control-sm" required>
               <option>Pilih Jenis Produk</option>
               @foreach ($jenis as $element)
-              <option value="{{$element->id}}" selected>{{$element->jenis}}</option>
+              <option value="{{$element->id}}" {{$element->id == $produk->id_jenis ? 'selected' : ''}}>{{$element->jenis}}</option>
               @endforeach
             </select>
           </div>
@@ -32,7 +37,7 @@ Edit Data Produk
             <select name="id_nama_produk" class="form-control form-control-sm" required>
               <option>Pilih Nama Produk</option>
               @foreach ($nama as $element)
-              <option value="{{$element->id}}" selected>{{$element->nama}}</option>
+              <option value="{{$element->id}}" {{$element->id == $produk->id_nama_produk ? 'selected' : ''}}>{{$element->nama}}</option>
               @endforeach
             </select>
           </div>
@@ -42,43 +47,35 @@ Edit Data Produk
                  <tr>
                   <th rowspan="2">NO</th>
                   <th rowspan="2">WITEL</th>
-                  <th colspan="3" class="text-center">SALES</th>
+                  <th colspan="2" class="text-center">SALES</th>
                   <th rowspan="2">TGT REV</th>
                   <th rowspan="2">PROGREV</th>
-                  <th rowspan="2">ACH REV</th>
                 </tr>
                 <tr>
                   <th>TGT</th>
                   <th>PSBLN</th>
-                  <th>ACH</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
                   <td>1</td>
-                  <td style="width: 180px;">
+                  <td>
                     <div class="col-xs-1">
                     <input type="text" name="witel" class="form-control input-sm" value="{{$produk->witel}}" />
                       
                     </div>
                   </td>
-                  <td style="width: 120px;">
+                  <td>
                     <input type="text" name="tgt" placeholder="0" class="form-control" value="{{$produk->tgt}}" />
                   </td>
-                  <td style="width: 120px;">
+                  <td>
                     <input type="text" name="psbln" placeholder="0" class="form-control" value="{{$produk->psbln}}" />
                   </td>
-                  <td style="width: 120px;">
-                    <input type="text" name="ach" placeholder="0" class="form-control" value="{{$produk->ach}}" />
-                  </td>
-                  <td style="width: 120px;">
+                  <td>
                     <input type="text" name="tgtrev" placeholder="0" class="form-control" value="{{$produk->tgtrev}}" />
                   </td>
-                  <td style="width: 80px;">
+                  <td>
                     <input type="text" name="progrev" placeholder="0" class="form-control" value="{{$produk->progrev}}" />
-                  </td>
-                  <td style="width: 120px;">
-                    <input type="text" name="achrev" placeholder="0" class="form-control" value="{{$produk->achrev}}" />
                   </td>
                 </tr>
               </tbody>

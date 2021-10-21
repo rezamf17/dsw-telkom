@@ -16,7 +16,7 @@ Edit Data Laporan
       <div class="card-header">
         <h4>Edit Data Laporan</h4>
         <div class="float-right" style="margin-left: 80%;">
-              <a href="{{url('KelolaLaporan')}}" class="btn btn-secondary">Kembali</a>
+              <a href="{{url('KelolaLaporan/'.$laporan->id_nama_produk)}}" class="btn btn-secondary">Kembali</a>
         </div>
       </div>
       <div class="card-body">
@@ -28,7 +28,7 @@ Edit Data Laporan
             <select name="id_jenis" class="form-control form-control-sm" required>
               <option>Pilih Jenis Produk</option>
               @foreach ($jenis as $element)
-              <option value="{{$element->id}}" selected>{{$element->jenis}}</option>
+              <option value="{{$element->id}}" {{$element->id == $laporan->id_jenis ? 'selected' : ''}}>{{$element->jenis}}</option>
               @endforeach
             </select>
           </div>
@@ -37,7 +37,7 @@ Edit Data Laporan
             <select name="id_nama_produk" class="form-control form-control-sm" required>
               <option>Pilih Nama Produk</option>
               @foreach ($nama as $element)
-              <option value="{{$element->id}}" selected>{{$element->nama}}</option>
+              <option value="{{$element->id}}" {{$element->id == $laporan->id_nama_produk ? 'selected' : ''}}>{{$element->nama}}</option>
               @endforeach
             </select>
           </div>
