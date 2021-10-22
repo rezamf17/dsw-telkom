@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Target;
-use App\Models\Produk;
+use App\Models\Nama;
+use Illuminate\Support\Facades\Validator;
 
 class TargetController extends Controller
 {
@@ -16,8 +17,8 @@ class TargetController extends Controller
     public function index()
     {    
          $target = Target::all();
-         $produk = Produk::all();
-        return view ('admin.KelolaTarget', compact('target', 'produk'));
+         $nama = Nama::all();
+        return view ('admin.KelolaTarget', compact('target', 'nama'));
     }
 
     /**
@@ -38,6 +39,16 @@ class TargetController extends Controller
      */
     public function store(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+        'jml_target' => 'required',
+        'time' => 'required',
+        'produk' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+        return back()->with('errors', $validator->messages()->all()[0])->withInput();
+        }
+
         $target = new Target;
         $target->jml_target = $request->jml_target;
         $target->time = $request->time;
@@ -80,6 +91,17 @@ class TargetController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $validator = Validator::make($request->all(), [
+        'jml_target' => 'required',
+        'time' => 'required',
+        'produk' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+        return back()->with('errors', $validator->messages()->all()[0])->withInput();
+        }
+
+        
         $target = Target::find($id);;
         $target->jml_target = $request->jml_target;
         $target->time = $request->time;

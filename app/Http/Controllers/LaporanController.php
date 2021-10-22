@@ -10,6 +10,7 @@ use App\Models\Produk;
 use App\Exports\LaporanExport;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Facades\Validator;
 
 class LaporanController extends Controller
 {
@@ -44,6 +45,20 @@ class LaporanController extends Controller
      */
     public function store(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+        'id_jenis' => 'required',
+        'id_nama_produk' => 'required',
+        'witel' => 'required',
+        'tgtmtd' => 'required',
+        'realmtd' => 'required',
+        'tgtrev' => 'required',
+        'progrev' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+        return back()->with('errors', $validator->messages()->all()[0])->withInput();
+        }
+
          foreach ($request->witel as $row => $key) {
          $laporan = new Laporan;
          $realmtd = $request->realmtd[$row];
@@ -104,6 +119,18 @@ class LaporanController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $validator = Validator::make($request->all(), [
+        'witel' => 'required',
+        'tgtmtd' => 'required',
+        'realmtd' => 'required',
+        'tgtrev' => 'required',
+        'progrev' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+        return back()->with('errors', $validator->messages()->all()[0])->withInput();
+        }
+
         $laporan = Laporan::find($id);
          $realmtd = $request->realmtd;
          $tgtmtd = $request->tgtmtd;

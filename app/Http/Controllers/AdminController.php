@@ -46,7 +46,7 @@ class AdminController extends Controller
         'name' => 'required',
         'address' => 'required',
         'telp' => 'required',
-        'email' => 'required',
+        'email' => 'required|email| unique:users',
         'role' => 'required',
         'password' => 'required|min:6|confirmed'
         ]);
@@ -105,7 +105,7 @@ class AdminController extends Controller
         'name' => 'required',
         'address' => 'required',
         'telp' => 'required',
-        'email' => 'required',
+        'email' => 'required|email',
         'role' => 'required',
         'password' => 'confirmed'
         ]);

@@ -26,7 +26,7 @@ Edit Data Produk
            <div class="form-group">
             Jenis Produk
             <select name="id_jenis" class="form-control form-control-sm" required>
-              <option>Pilih Jenis Produk</option>
+              <option value="">Pilih Jenis Produk</option>
               @foreach ($jenis as $element)
               <option value="{{$element->id}}" {{$element->id == $produk->id_jenis ? 'selected' : ''}}>{{$element->jenis}}</option>
               @endforeach
@@ -35,7 +35,7 @@ Edit Data Produk
            <div class="form-group">
             Nama Produk
             <select name="id_nama_produk" class="form-control form-control-sm" required>
-              <option>Pilih Nama Produk</option>
+              <option value="">Pilih Nama Produk</option>
               @foreach ($nama as $element)
               <option value="{{$element->id}}" {{$element->id == $produk->id_nama_produk ? 'selected' : ''}}>{{$element->nama}}</option>
               @endforeach
@@ -61,21 +61,21 @@ Edit Data Produk
                   <td>1</td>
                   <td>
                     <div class="col-xs-1">
-                    <input type="text" name="witel" class="form-control input-sm" value="{{$produk->witel}}" />
+                    <input type="text" name="witel" class="form-control input-sm" value="{{$produk->witel}}" required/>
                       
                     </div>
                   </td>
                   <td>
-                    <input type="text" name="tgt" placeholder="0" class="form-control" value="{{$produk->tgt}}" />
+                    <input type="text" name="tgt" placeholder="0" class="form-control" value="{{$produk->tgt}}" onkeypress="return event.charCode >=48 && event.charCode <=57" required/>
                   </td>
                   <td>
-                    <input type="text" name="psbln" placeholder="0" class="form-control" value="{{$produk->psbln}}" />
+                    <input type="text" name="psbln" placeholder="0" class="form-control" value="{{$produk->psbln}}" onkeypress="return event.charCode >=48 && event.charCode <=57" required/>
                   </td>
                   <td>
-                    <input type="text" name="tgtrev" placeholder="0" class="form-control" value="{{$produk->tgtrev}}" />
+                    <input type="text" name="tgtrev" placeholder="0" class="form-control" value="{{$produk->tgtrev}}" onkeypress="return event.charCode >=48 && event.charCode <=57" required/>
                   </td>
                   <td>
-                    <input type="text" name="progrev" placeholder="0" class="form-control" value="{{$produk->progrev}}" />
+                    <input type="text" name="progrev" placeholder="0" class="form-control" value="{{$produk->progrev}}" onkeypress="return event.charCode >=48 && event.charCode <=57" required/>
                   </td>
                 </tr>
               </tbody>

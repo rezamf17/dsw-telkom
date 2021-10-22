@@ -90,8 +90,8 @@ Kelola Target
             Produk
             <select name="produk" class="form-control form-control-sm" required>
               <option>Pilih Produk</option>
-              @foreach ($produk as $element)
-              <option value="{{$element->nama_produk}}">{{$element->nama_produk}}</option>
+              @foreach ($nama as $element)
+              <option value="{{$element->nama}}">{{$element->nama}}</option>
               @endforeach
             </select>
           </div>

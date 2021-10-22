@@ -26,7 +26,7 @@ Edit Data Laporan
            <div class="form-group">
             Jenis Produk
             <select name="id_jenis" class="form-control form-control-sm" required>
-              <option>Pilih Jenis Produk</option>
+              <option value="">Pilih Jenis Produk</option>
               @foreach ($jenis as $element)
               <option value="{{$element->id}}" {{$element->id == $laporan->id_jenis ? 'selected' : ''}}>{{$element->jenis}}</option>
               @endforeach
@@ -35,7 +35,7 @@ Edit Data Laporan
            <div class="form-group">
             Nama Produk
             <select name="id_nama_produk" class="form-control form-control-sm" required>
-              <option>Pilih Nama Produk</option>
+              <option value="">Pilih Nama Produk</option>
               @foreach ($nama as $element)
               <option value="{{$element->id}}" {{$element->id == $laporan->id_nama_produk ? 'selected' : ''}}>{{$element->nama}}</option>
               @endforeach
@@ -58,21 +58,20 @@ Edit Data Laporan
                   <td>1</td>
                   <td>
                     <div class="col-xs-1">
-                    <input type="text" name="witel" class="form-control input-sm" value="{{$laporan->witel}}" />
-                      
+                    <input type="text" name="witel" class="form-control input-sm" value="{{$laporan->witel}}" required/>
                     </div>
                   </td>
                   <td>
-                    <input type="text" name="tgtmtd" placeholder="0" class="form-control" value="{{$laporan->tgtmtd}}" />
+                    <input type="text" name="tgtmtd" placeholder="0" class="form-control" value="{{$laporan->tgtmtd}}" onkeypress="return event.charCode >=48 && event.charCode <=57" required/>
                   </td>
                   <td>
-                    <input type="text" name="realmtd" placeholder="0" class="form-control" value="{{$laporan->realmtd}}" />
+                    <input type="text" name="realmtd" placeholder="0" class="form-control" value="{{$laporan->realmtd}}" onkeypress="return event.charCode >=48 && event.charCode <=57" required/>
                   </td>
                   <td>
-                    <input type="text" name="tgtrev" placeholder="0" class="form-control" value="{{$laporan->tgtrev}}" />
+                    <input type="text" name="tgtrev" placeholder="0" class="form-control" value="{{$laporan->tgtrev}}" onkeypress="return event.charCode >=48 && event.charCode <=57" required/>
                   </td>
                   <td>
-                    <input type="text" name="progrev" placeholder="0" class="form-control" value="{{$laporan->progrev}}" />
+                    <input type="text" name="progrev" placeholder="0" class="form-control" value="{{$laporan->progrev}}" onkeypress="return event.charCode >=48 && event.charCode <=57" required/>
                   </td>
                 </tr>
               </tbody>

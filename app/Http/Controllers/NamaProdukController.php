@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Nama;
+use Illuminate\Support\Facades\Validator;
 
 class NamaProdukController extends Controller
 {
@@ -36,6 +37,14 @@ class NamaProdukController extends Controller
      */
     public function store(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+        'nama' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+        return back()->with('errors', $validator->messages()->all()[0])->withInput();
+        }
+
         $nama = new Nama;
         $nama->nama = $request->nama;
         $nama->save();
@@ -75,6 +84,14 @@ class NamaProdukController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $validator = Validator::make($request->all(), [
+        'nama' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+        return back()->with('errors', $validator->messages()->all()[0])->withInput();
+        }
+        
         $nama = Nama::find($id);
         $nama->nama = $request->nama;
         $nama->save();
