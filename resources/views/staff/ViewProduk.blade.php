@@ -98,7 +98,7 @@ Lihat Produk
           @csrf
           <div class="form-group">
             Pilih Tanggal Laporan
-            <input type="date" name="time" class="form-control form-control-sm">
+            <input type="date" name="time" class="form-control form-control-sm" required>
           </div>
         </div>
         <div class="modal-footer bg-whitesmoke br">

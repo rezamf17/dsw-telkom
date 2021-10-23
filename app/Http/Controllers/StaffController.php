@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Produk;
+use App\Models\Laporan;
+
 
 class StaffController extends Controller
 {
@@ -13,7 +16,9 @@ class StaffController extends Controller
      */
     public function index()
     {
-        return view('staff.DashboardStaff');
+        $produk_count = Produk::all()->count();
+        $laporan_count = Laporan::all()->count();
+        return view('staff.DashboardStaff', compact('produk_count', 'laporan_count'));
     }
 
     /**

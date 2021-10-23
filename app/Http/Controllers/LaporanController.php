@@ -168,6 +168,14 @@ class LaporanController extends Controller
 
     public function viewExport(Request $request, $id)
     {
+        $validator = Validator::make($request->all(), [
+        'time' => 'required|exists:kelola_produk,created_at',
+        ]);
+
+        if ($validator->fails()) {
+        return back()->with('errors', $validator->messages()->all()[0])->withInput();
+        }
+        
         $time = $request->time;
         $laporan_query = DB::table('kelola_laporan')
                 ->select('id_nama_produk', 'witel', 'tgtmtd', 'realmtd', 'ach', 'shrtge', 'tgtrev', 'progrev', 'achrev')

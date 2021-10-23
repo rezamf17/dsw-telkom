@@ -9,6 +9,7 @@ use App\Models\Jenis;
 use App\Exports\ProdukExport;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 
 class ProdukController extends Controller
 {
@@ -146,6 +147,14 @@ class ProdukController extends Controller
 
     public function viewExport(Request $request, $id)
     {
+        $validator = Validator::make($request->all(), [
+        'time' => 'required|exists:kelola_produk,created_at',
+        ]);
+
+        if ($validator->fails()) {
+        return back()->with('errors', $validator->messages()->all()[0])->withInput();
+        }
+
         $time = $request->time;
         $produk_query = DB::table('kelola_produk')
                 ->select('id_nama_produk', 'witel', 'tgt', 'psbln', 'ach', 'tgtrev', 'progrev', 'achrev')
@@ -173,6 +182,10 @@ class ProdukController extends Controller
                 ->where('witel', 'like', 'TREG%')
                 ->get();
         $produk_id = Produk::where('id_nama_produk', $id)->first();
+
+        // if (DB::table('kelola_produk')->where('created_at', $time)->doesntExist()) {
+        //     return back()->with('errors', $validator->messages()->all()[0])->withInput();
+        // }
         return view ('staff.ViewExport', compact(
             'produk_query',
             'nama',
@@ -189,6 +202,7 @@ class ProdukController extends Controller
 
     public function export(Request $request, $id) 
     {
+
         $time = $request->time;
         $produk_query = DB::table('kelola_produk')
                 ->select('id_nama_produk', 'witel', 'tgt', 'psbln', 'ach', 'tgtrev', 'progrev', 'achrev')
