@@ -156,6 +156,8 @@ class ProdukController extends Controller
         }
 
         $time = $request->time;
+        $nama = Produk::where('id_nama_produk', $id)->first();
+        $produk_id = Produk::where('id_nama_produk', $id)->first();
         $produk_query = DB::table('kelola_produk')
                 ->select('id_nama_produk', 'witel', 'tgt', 'psbln', 'ach', 'tgtrev', 'progrev', 'achrev')
                 ->selectRaw('RANK() OVER(ORDER BY ach DESC) AS `rank`')
@@ -165,13 +167,38 @@ class ProdukController extends Controller
                 ->where('created_at', $time)
                 ->where('witel', 'not like', 'TREG%')
                 ->get();
-        $nama = Produk::where('id_nama_produk', $id)->first();
-        $sumtgt =  Produk::where('id_nama_produk', $id)->where('created_at', $time)->sum('tgt');
-        $sumpsbln =  Produk::where('id_nama_produk', $id)->where('created_at', $time)->sum('psbln');
-        $sumach = round($sumtgt / $sumpsbln * 100); 
-        $sumtgtrev = Produk::where('id_nama_produk', $id)->where('created_at', $time)->sum('tgtrev');
-        $sumprogrev = Produk::where('id_nama_produk', $id)->where('created_at', $time)->sum('progrev');
-        $sumachrev = round($sumtgtrev / $sumprogrev * 100);
+        $sumtgt =  Produk::where('id_nama_produk', $id)
+                ->where('created_at', $time)
+                ->where('witel', 'not like', 'TREG%')->sum('tgt');
+        $sumpsbln =  Produk::where('id_nama_produk', $id)
+                ->where('created_at', $time)->where('witel', 'not like', 'TREG%')
+                ->sum('psbln');
+        $sumach = round($sumpsbln / $sumtgt * 100); 
+        $sumtgtrev = Produk::where('id_nama_produk', $id)
+                ->where('created_at', $time)
+                ->where('witel', 'not like', 'TREG%')->sum('tgtrev');
+        $sumprogrev = Produk::where('id_nama_produk', $id)
+                ->where('created_at', $time)
+                ->where('witel', 'not like', 'TREG%')->sum('progrev');
+        $sumachrev = round($sumprogrev / $sumtgtrev * 100);
+
+
+        //QUERY TREG
+        $sumtgt_treg =  Produk::where('id_nama_produk', $id)
+                ->where('created_at', $time)
+                ->where('witel', 'like', 'TREG%')->sum('tgt');
+        $sumpsbln_treg =  Produk::where('id_nama_produk', $id)
+                ->where('created_at', $time)
+                ->where('witel', 'like', 'TREG%')
+                ->sum('psbln');
+        $sumach_treg = round($sumpsbln_treg / $sumtgt_treg * 100); 
+        $sumtgtrev_treg = Produk::where('id_nama_produk', $id)
+                ->where('created_at', $time)
+                ->where('witel', 'like', 'TREG%')->sum('tgtrev');
+        $sumprogrev_treg = Produk::where('id_nama_produk', $id)
+                ->where('created_at', $time)
+                ->where('witel', 'like', 'TREG%')->sum('progrev');
+        $sumachrev_treg = round($sumprogrev_treg / $sumtgtrev_treg * 100);
         $treg_query = DB::table('kelola_produk')
                 ->select('id_nama_produk', 'witel', 'tgt', 'psbln', 'ach', 'tgtrev', 'progrev', 'achrev')
                 ->selectRaw('RANK() OVER(ORDER BY ach DESC) AS `rank`')
@@ -181,11 +208,7 @@ class ProdukController extends Controller
                 ->where('created_at', $time)
                 ->where('witel', 'like', 'TREG%')
                 ->get();
-        $produk_id = Produk::where('id_nama_produk', $id)->first();
 
-        // if (DB::table('kelola_produk')->where('created_at', $time)->doesntExist()) {
-        //     return back()->with('errors', $validator->messages()->all()[0])->withInput();
-        // }
         return view ('staff.ViewExport', compact(
             'produk_query',
             'nama',
@@ -197,13 +220,21 @@ class ProdukController extends Controller
             'sumtgtrev',
             'sumprogrev',
             'sumachrev',
-            'produk_id'));
+            'produk_id',
+            'sumtgt_treg',
+            'sumpsbln_treg', 
+            'sumach_treg', 
+            'sumtgtrev_treg',
+            'sumprogrev_treg',
+            'sumachrev_treg',));
     }
 
     public function export(Request $request, $id) 
     {
 
         $time = $request->time;
+        $nama = Produk::where('id_nama_produk', $id)->first();
+        $produk_id = Produk::where('id_nama_produk', $id)->first();
         $produk_query = DB::table('kelola_produk')
                 ->select('id_nama_produk', 'witel', 'tgt', 'psbln', 'ach', 'tgtrev', 'progrev', 'achrev')
                 ->selectRaw('RANK() OVER(ORDER BY ach DESC) AS `rank`')
@@ -213,13 +244,38 @@ class ProdukController extends Controller
                 ->where('created_at', $time)
                 ->where('witel', 'not like', 'TREG%')
                 ->get();
-        $nama = Produk::where('id_nama_produk', $id)->first();
-        $sumtgt =  Produk::where('id_nama_produk', $id)->where('created_at', $time)->sum('tgt');
-        $sumpsbln =  Produk::where('id_nama_produk', $id)->where('created_at', $time)->sum('psbln');
-        $sumach = round($sumtgt / $sumpsbln * 100); 
-        $sumtgtrev = Produk::where('id_nama_produk', $id)->where('created_at', $time)->sum('tgtrev');
-        $sumprogrev = Produk::where('id_nama_produk', $id)->where('created_at', $time)->sum('progrev');
-        $sumachrev = round($sumtgtrev / $sumprogrev * 100);
+        $sumtgt =  Produk::where('id_nama_produk', $id)
+                ->where('created_at', $time)
+                ->where('witel', 'not like', 'TREG%')->sum('tgt');
+        $sumpsbln =  Produk::where('id_nama_produk', $id)
+                ->where('created_at', $time)->where('witel', 'not like', 'TREG%')
+                ->sum('psbln');
+        $sumach = round($sumpsbln / $sumtgt * 100); 
+        $sumtgtrev = Produk::where('id_nama_produk', $id)
+                ->where('created_at', $time)
+                ->where('witel', 'not like', 'TREG%')->sum('tgtrev');
+        $sumprogrev = Produk::where('id_nama_produk', $id)
+                ->where('created_at', $time)
+                ->where('witel', 'not like', 'TREG%')->sum('progrev');
+        $sumachrev = round($sumprogrev / $sumtgtrev * 100);
+
+
+        //QUERY TREG
+        $sumtgt_treg =  Produk::where('id_nama_produk', $id)
+                ->where('created_at', $time)
+                ->where('witel', 'like', 'TREG%')->sum('tgt');
+        $sumpsbln_treg =  Produk::where('id_nama_produk', $id)
+                ->where('created_at', $time)
+                ->where('witel', 'like', 'TREG%')
+                ->sum('psbln');
+        $sumach_treg = round($sumpsbln_treg / $sumtgt_treg * 100); 
+        $sumtgtrev_treg = Produk::where('id_nama_produk', $id)
+                ->where('created_at', $time)
+                ->where('witel', 'like', 'TREG%')->sum('tgtrev');
+        $sumprogrev_treg = Produk::where('id_nama_produk', $id)
+                ->where('created_at', $time)
+                ->where('witel', 'like', 'TREG%')->sum('progrev');
+        $sumachrev_treg = round($sumprogrev_treg / $sumtgtrev_treg * 100);
         $treg_query = DB::table('kelola_produk')
                 ->select('id_nama_produk', 'witel', 'tgt', 'psbln', 'ach', 'tgtrev', 'progrev', 'achrev')
                 ->selectRaw('RANK() OVER(ORDER BY ach DESC) AS `rank`')
@@ -239,7 +295,31 @@ class ProdukController extends Controller
         //     'sumach', 
         //     'sumtgtrev',
         //     'sumprogrev',
-        //     'sumachrev'));
-        return Excel::download(new ProdukExport($id, $request, $time, $produk_query, $nama, $sumtgt, $sumpsbln, $sumach, $sumtgtrev, $sumprogrev, $sumachrev, $treg_query ), 'ReportProduk'.$nama->nama->nama.$time.'.xlsx');
+        //     'sumachrev',
+        //     'produk_id',
+        //     'sumtgt_treg',
+        //     'sumpsbln_treg', 
+        //     'sumach_treg', 
+        //     'sumtgtrev_treg',
+        //     'sumprogrev_treg',
+        //     'sumachrev_treg',));
+        return Excel::download(new ProdukExport($id, 
+            $request, 
+            $time, 
+            $produk_query, 
+            $nama, 
+            $sumtgt, 
+            $sumpsbln, 
+            $sumach, 
+            $sumtgtrev, 
+            $sumprogrev, 
+            $sumachrev,
+            $sumtgt_treg, 
+            $sumpsbln_treg, 
+            $sumach_treg, 
+            $sumtgtrev_treg, 
+            $sumprogrev_treg, 
+            $sumachrev_treg, 
+            $treg_query ), 'ReportProduk'.$nama->nama->nama.$time.'.xlsx');
     }
 }

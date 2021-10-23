@@ -83,13 +83,13 @@
       @endforeach
       <tr>
       <td colspan="2">Total</td>
-      <td>{{$sumtgt}}</td>
-      <td>{{$sumpsbln}}</td>
-      <td>{{$sumach}}%</td>
+      <td>{{$sumtgt_treg}}</td>
+      <td>{{$sumpsbln_treg}}</td>
+      <td>{{$sumach_treg}}%</td>
       <td></td>
-      <td>{{$sumtgtrev}}</td>
-      <td>{{$sumprogrev}}</td>
-      <td>{{$sumachrev}}%</td>
+      <td>{{$sumtgtrev_treg}}</td>
+      <td>{{$sumprogrev_treg}}</td>
+      <td>{{$sumachrev_treg}}%</td>
     </tr>
   </tbody>
 </table>

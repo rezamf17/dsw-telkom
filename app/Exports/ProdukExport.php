@@ -24,9 +24,15 @@ class ProdukExport implements FromView
     protected $sumach;
     protected $sumtgtrev;
     protected $sumprogrev;
-    protected $sumachrev;    
+    protected $sumachrev;
+    protected $sumtgt_treg;
+    protected $sumpsbln_treg;
+    protected $sumach_treg;
+    protected $sumtgtrev_treg;
+    protected $sumprogrev_treg;
+    protected $sumachrev_treg;    
     protected $treg_query;
-    public function __construct($id, $time, $request, $produk_query, $nama, $sumtgt, $sumpsbln, $sumach, $sumtgtrev, $sumprogrev, $sumachrev, $treg_query)
+    public function __construct($id, $time, $request, $produk_query, $nama, $sumtgt, $sumpsbln, $sumach, $sumtgtrev, $sumprogrev, $sumachrev,$sumtgt_treg, $sumpsbln_treg, $sumach_treg, $sumtgtrev_treg, $sumprogrev_treg, $sumachrev_treg, $treg_query)
     {
         $this->id = $id;
         $this->request = $request;
@@ -39,6 +45,12 @@ class ProdukExport implements FromView
         $this->sumtgtrev = $sumtgtrev; 
         $this->sumprogrev = $sumprogrev; 
         $this->sumachrev = $sumachrev;
+        $this->sumtgt_treg = $sumtgt_treg; 
+        $this->sumpsbln_treg = $sumpsbln_treg; 
+        $this->sumach_treg = $sumach_treg; 
+        $this->sumtgtrev_treg = $sumtgtrev_treg; 
+        $this->sumprogrev_treg = $sumprogrev_treg; 
+        $this->sumachrev_treg = $sumachrev_treg;
         $this->treg_query = $treg_query;
     }
 
@@ -54,6 +66,12 @@ class ProdukExport implements FromView
         $sumtgtrev = $this->sumtgtrev;
         $sumprogrev = $this->sumprogrev;
         $sumachrev = $this->sumachrev;
+        $sumtgt_treg = $this->sumtgt_treg;
+        $sumpsbln_treg = $this->sumpsbln_treg;
+        $sumach_treg = $this->sumach_treg;
+        $sumtgtrev_treg = $this->sumtgtrev_treg;
+        $sumprogrev_treg = $this->sumprogrev_treg;
+        $sumachrev_treg = $this->sumachrev_treg;
         $treg_query = $this->treg_query;
         return view('staff.LaporanProduk', compact('id', 'produk_query', 'time', 'nama', 'sumtgt', 
             'sumpsbln', 
@@ -61,6 +79,12 @@ class ProdukExport implements FromView
             'sumtgtrev',
             'sumprogrev',
             'sumachrev',
+            'sumtgt_treg',
+            'sumpsbln_treg', 
+            'sumach_treg', 
+            'sumtgtrev_treg',
+            'sumprogrev_treg',
+            'sumachrev_treg',
             'treg_query'));
     }
 }
