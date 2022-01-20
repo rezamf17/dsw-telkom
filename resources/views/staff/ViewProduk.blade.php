@@ -12,7 +12,7 @@ Lihat Produk
 <section class="section">
 
   <div class="section-body">
-
+division by zero error bcs treg null
     <div class="row">
       <div class="col-12">
         <div class="card">

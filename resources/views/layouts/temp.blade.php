@@ -10,7 +10,7 @@
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
  <link rel="stylesheet" href="{{ asset('style/node_modules/datatables.net-bs4/css/dataTables.bootstrap4.min.css') }}">
   <link rel="stylesheet" href="{{ asset('style/node_modules/datatables.net-select-bs4/css/select.bootstrap4.min.css') }}">
-
+  <link rel="icon" href="{{asset('assets/img/telkomlogo.png')}}">
   <!-- Template CSS -->
   <link rel="stylesheet" href="{{ asset('style/node_modules/izitoast/dist/css/iziToast.min.css') }}">
   <link rel="stylesheet" href="{{ asset('style/assets/css/style.css') }}">
@@ -105,7 +105,7 @@
               <div class="dropdown-list-content dropdown-list-message">
                 <a href="#" class="dropdown-item dropdown-item-unread">
                   <div class="dropdown-item-avatar">
-                    <img alt="image" src="{{ asset('style/assets/img/avatar/avatar-1.png') }}" class="rounded-circle">
+                    <img alt="image" src="{{ asset('style/assets/img/avatar/avatar-5.png') }}" class="rounded-circle">
                     <div class="is-online"></div>
                   </div>
                   <div class="dropdown-item-desc">
@@ -221,7 +221,7 @@
             </div>
           </li>
           <li class="dropdown"><a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
-            <img alt="image" src="{{ asset('style/assets/img/avatar/avatar-1.png') }}" class="rounded-circle mr-1">
+            <img alt="image" src="{{ asset('style/assets/img/avatar/avatar-5.png') }}" class="rounded-circle mr-1">
             <div class="d-sm-none d-lg-inline-block">Hi, {{ Auth::user()->name }}</div></a>
             <div class="dropdown-menu dropdown-menu-right">
               <div class="dropdown-title">Logged in 5 min ago</div>

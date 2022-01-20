@@ -53,8 +53,9 @@ class TargetController extends Controller
         $target->jml_target = $request->jml_target;
         $target->time = $request->time;
         $target->produk = $request->produk;
-        $target->save();
-        return redirect('/KelolaTarget')->with('success', 'Target berhasil disimpan!');
+        // $target->save();
+        print_r($request->all());
+        // return redirect('/KelolaTarget')->with('success', 'Target berhasil disimpan!');
     }
 
     /**

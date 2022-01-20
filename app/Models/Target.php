@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Target extends Model
 {
     protected $table = 'table_target';
-    protected $fillable = ['jml_target', 'time', 'produk'];
+    protected $guarded = [];
+    // protected $fillable = ['jml_target', 'time', 'produk'];
     use HasFactory;
 }

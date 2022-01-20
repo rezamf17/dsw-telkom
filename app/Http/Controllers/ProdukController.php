@@ -191,14 +191,22 @@ class ProdukController extends Controller
                 ->where('created_at', $time)
                 ->where('witel', 'like', 'TREG%')
                 ->sum('psbln');
-        $sumach_treg = round($sumpsbln_treg / $sumtgt_treg * 100); 
+        if ($sumpsbln_treg == null && $sumtgt_treg == null) {
+                $sumach_treg = '';
+        }else{
+                $sumach_treg = round($sumpsbln_treg / $sumtgt_treg * 100); 
+        }
         $sumtgtrev_treg = Produk::where('id_nama_produk', $id)
                 ->where('created_at', $time)
                 ->where('witel', 'like', 'TREG%')->sum('tgtrev');
         $sumprogrev_treg = Produk::where('id_nama_produk', $id)
                 ->where('created_at', $time)
                 ->where('witel', 'like', 'TREG%')->sum('progrev');
-        $sumachrev_treg = round($sumprogrev_treg / $sumtgtrev_treg * 100);
+        if ($sumprogrev_treg == null && $sumtgtrev_treg == null) {
+                $sumachrev_treg = '';
+        }else{      
+                $sumachrev_treg = round($sumprogrev_treg / $sumtgtrev_treg * 100);
+        }
         $treg_query = DB::table('kelola_produk')
                 ->select('id_nama_produk', 'witel', 'tgt', 'psbln', 'ach', 'tgtrev', 'progrev', 'achrev')
                 ->selectRaw('RANK() OVER(ORDER BY ach DESC) AS `rank`')
@@ -268,14 +276,22 @@ class ProdukController extends Controller
                 ->where('created_at', $time)
                 ->where('witel', 'like', 'TREG%')
                 ->sum('psbln');
-        $sumach_treg = round($sumpsbln_treg / $sumtgt_treg * 100); 
+        if ($sumpsbln_treg == null && $sumtgt_treg == null) {
+                $sumach_treg = '';
+        }else{
+                $sumach_treg = round($sumpsbln_treg / $sumtgt_treg * 100); 
+        } 
         $sumtgtrev_treg = Produk::where('id_nama_produk', $id)
                 ->where('created_at', $time)
                 ->where('witel', 'like', 'TREG%')->sum('tgtrev');
         $sumprogrev_treg = Produk::where('id_nama_produk', $id)
                 ->where('created_at', $time)
                 ->where('witel', 'like', 'TREG%')->sum('progrev');
-        $sumachrev_treg = round($sumprogrev_treg / $sumtgtrev_treg * 100);
+        if ($sumprogrev_treg == null && $sumtgtrev_treg == null) {
+                $sumachrev_treg = '';
+        }else{      
+                $sumachrev_treg = round($sumprogrev_treg / $sumtgtrev_treg * 100);
+        }
         $treg_query = DB::table('kelola_produk')
                 ->select('id_nama_produk', 'witel', 'tgt', 'psbln', 'ach', 'tgtrev', 'progrev', 'achrev')
                 ->selectRaw('RANK() OVER(ORDER BY ach DESC) AS `rank`')
