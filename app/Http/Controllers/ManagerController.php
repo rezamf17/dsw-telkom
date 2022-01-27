@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Produk;
+use App\Models\Laporan;
 
 class ManagerController extends Controller
 {
@@ -13,7 +15,9 @@ class ManagerController extends Controller
      */
     public function index()
     {
-        return view ('manager.DashboardManager');
+        $produk_count = Produk::all()->count();
+        $laporan_count = Laporan::all()->count();
+        return view ('manager.DashboardManager', compact('produk_count', 'laporan_count'));
     }
 
     /**
