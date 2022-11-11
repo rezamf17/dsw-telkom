@@ -22,7 +22,7 @@ use App\Http\Controllers\ManagerController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth/login');
 });
 
 Route::get('/temp', function () {
