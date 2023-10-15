@@ -51,13 +51,13 @@ Kelola Akun
                     @else
                     Staff
                   @endif</td>
-                  <th style="display: block ruby;">
-                    <a href="{{url('KelolaAkun/'.$user->id.'/edit')}}" title="" class="btn btn-success"><i class="fa fa-edit"></i>Edit</a>
+                  <th style="display: contents;">
+                    <a href="{{url('KelolaAkun/'.$user->id.'/edit')}}" title="" class="btn btn-success"><i class="fa fa-edit"></i></a>
                     <form action="{{url('KelolaAkun', $user->id)}}" method="post" class="d-inline" onsubmit="return confirm('Yakin hapus data?')">
                   @method('delete')
                   @csrf
-                  <button type="submit" class="btn btn-danger">
-                    <i class="fa fa-trash"></i>Hapus
+                  <button type="submit" class="btn btn-danger rounded">
+                    <i class="fa fa-trash"></i>
                   </button>
                   </th>
                 </tr>

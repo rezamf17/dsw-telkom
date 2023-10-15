@@ -15,7 +15,7 @@ class TargetController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {    
+    {
          $target = Target::all();
          $nama = Nama::all();
         return view ('admin.KelolaTarget', compact('target', 'nama'));
@@ -53,9 +53,9 @@ class TargetController extends Controller
         $target->jml_target = $request->jml_target;
         $target->time = $request->time;
         $target->produk = $request->produk;
-        // $target->save();
-        print_r($request->all());
-        // return redirect('/KelolaTarget')->with('success', 'Target berhasil disimpan!');
+        $target->save();
+        // print_r($request->all());
+        return redirect('/KelolaTarget')->with('success', 'Target berhasil disimpan!');
     }
 
     /**
@@ -77,7 +77,7 @@ class TargetController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
-    {   
+    {
         $target = Target::where('id', $id)->first();
         $produk = Produk::all();
         return view ('admin.EditTarget', compact('produk', 'target'));
@@ -102,7 +102,7 @@ class TargetController extends Controller
         return back()->with('errors', $validator->messages()->all()[0])->withInput();
         }
 
-        
+
         $target = Target::find($id);;
         $target->jml_target = $request->jml_target;
         $target->time = $request->time;

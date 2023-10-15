@@ -1,6 +1,6 @@
 @extends('layouts.temp')
 @section('title')
-Lihat Produk 
+Lihat Produk
 @endsection
 @section('breadcrumb')
 <div class="section-header-breadcrumb">

@@ -17,7 +17,7 @@ Kelola Nama Produk
       <div class="col-12">
         <div class="card">
           <div class="card-header">
-            <h4>Kelola Akun</h4>
+            <h4>Kelola Nama Produk</h4>
           </div>
           <div class="card-body">
             <button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Tambah Data</button>
