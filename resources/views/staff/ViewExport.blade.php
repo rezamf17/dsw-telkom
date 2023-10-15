@@ -13,6 +13,7 @@ Report
     <div class="card-body">
       <h5>Nama Produk : {{$nama->nama->nama}}</h5>
       <h5>Tanggal : {{$nama->created_at->format('j F, Y')}}</h5>
+      {{$produk_id->id_nama_produk}}
       <table class="table table-striped">
         <thead>
           <tr>

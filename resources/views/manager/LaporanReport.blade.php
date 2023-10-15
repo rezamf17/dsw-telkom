@@ -12,11 +12,11 @@
       <th>REALMTD</th>
       <th>ACH</th>
       <th>SHRTGE</th>
+      <th>RANK</th>
       <th>TGT REV</th>
       <th>PROGREV</th>
       <th>ACH REV</th>
-      <th>TANGGAL</th>
-      <th>ACTION</th>
+      <th>RANK REV</th>
     </tr>
   </thead>
   <tbody>

@@ -60,7 +60,7 @@ Report
 
   </div>
   <div class="card-footer">
-    <form action="{{ url('exportLaporan/'.$nama->id) }}" method="post" accept-charset="utf-8">
+    <form action="{{ url('exportLaporan/'.$nama->nama->id) }}" method="post" accept-charset="utf-8">
       @csrf
       <input style="display: none;" type="text" name="time" value="{{$nama->created_at}}">
       <button type="submit" class="btn btn-primary">Report Excel</button>

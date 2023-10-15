@@ -36,9 +36,9 @@ Route::get('/profile', function () {
     return view('profile');
 });
 
+Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::group(['middleware' => ['auth', 'role:1']], function(){
-// Route::middleware(['auth', 'role:1'])->group(function () {
-    Route::get('/home', [HomeController::class, 'index'])->name('home');
+    // Route::middleware(['auth', 'role:1'])->group(function () {
     // Route::get('/KelolaAkun', 'AdminController@index')->name('KelolaAkun');
     // Route::get('/KelolaAkun', [AdminController::class, 'index'])->name('KelolaAkun');
     Route::resource('KelolaAkun', AdminController::class)->names([
@@ -54,8 +54,8 @@ Route::group(['middleware' => ['auth', 'role:2']], function(){
     Route::get('/manager', [ManagerController::class, 'index'])->name('manager');
     Route::resource('KelolaLaporan', LaporanController::class);
     Route::post('KelolaLaporan/viewExport/{id}', [LaporanController::class, 'viewExport']);
-    Route::post('exportLaporan/{id}', [LaporanController::class, 'export']);
 });
+Route::post('exportLaporan/{id}', [LaporanController::class, 'export']);
 Route::group(['middleware' => ['auth', 'role:3,2']], function(){
     Route::get('/staff', [StaffController::class, 'index'])->name('staff');
     Route::resource('KelolaProduk', ProdukController::class)->names([
@@ -67,8 +67,8 @@ Route::group(['middleware' => ['auth', 'role:3,2']], function(){
     Route::resource('NamaProduk', NamaProdukController::class);
     Route::get('Produk/export/', [ProdukController::class, 'export']);
     Route::post('KelolaProduk/viewExport/{id}', [ProdukController::class, 'viewExport']);
-    Route::post('export/{id}', [ProdukController::class, 'export']);
 });
+Route::post('export/{id}', [ProdukController::class, 'export']);
 
 // Route::group(['middleware' => ['auth', 'role:3']], function() {
 //     Route::resource('');
