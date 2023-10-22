@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
-  <title>Login &mdash; Stisla</title>
+  <title>Login &mdash; DSW</title>
 
   <!-- General CSS Files -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-
+  <link rel="icon" href="{{asset('assets/img/telkomlogo.png')}}">
   <!-- CSS Libraries -->
   <link rel="stylesheet" href="../node_modules/bootstrap-social/bootstrap-social.css">
 
@@ -62,20 +62,14 @@
                               <button type="submit" class="btn btn-primary">
                                   {{ __('Login') }}
                               </button>
-
-                              @if (Route::has('password.request'))
-                                  <a class="btn btn-link" href="{{ route('password.request') }}">
-                                      {{ __('Forgot Your Password?') }}
-                                  </a>
-                              @endif
                           </div>
                       </div>
                     </form>
                 </div>
             </div>
-            <div class="mt-5 text-muted text-center">
+            {{-- <div class="mt-5 text-muted text-center">
               <a href="{{url('register')}}">Register</a>
-            </div>
+            </div> --}}
             {{-- <div class="simple-footer">
               Copyright &copy; Stisla 2018
             </div> --}}

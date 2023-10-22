@@ -8,13 +8,14 @@
   <!-- General CSS Files -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
- <link rel="stylesheet" href="{{ asset('style/node_modules/datatables.net-bs4/css/dataTables.bootstrap4.min.css') }}">
-  <link rel="stylesheet" href="{{ asset('style/node_modules/datatables.net-select-bs4/css/select.bootstrap4.min.css') }}">
   <link rel="icon" href="{{asset('assets/img/telkomlogo.png')}}">
   <!-- Template CSS -->
-  <link rel="stylesheet" href="{{ asset('style/node_modules/izitoast/dist/css/iziToast.min.css') }}">
+  {{-- <link rel="stylesheet" href="{{ asset('style/node_modules/izitoast/dist/css/iziToast.min.css') }}"> --}}
   <link rel="stylesheet" href="{{ asset('style/assets/css/style.css') }}">
   <link rel="stylesheet" href="{{ asset('style/assets/css/components.css') }}">
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
+  <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
 {{--   <link rel="stylesheet" href="../assets/css/style.css">
   <link rel="stylesheet" href="../assets/css/components.css"> --}}
 {{--   <link rel="stylesheet" href="../node_modules/datatables.net-bs4/css/dataTables.bootstrap4.min.css">
@@ -327,15 +328,13 @@
     $('#table-1').DataTable();
     } );
   </script> --}}
-  <script src=" {{asset('style/node_modules/datatables/media/js/jquery.dataTables.min.js')}}"></script>
-  <script src="{{asset('style/node_modules/datatables.net-bs4/js/dataTables.bootstrap4.min.js')}}"></script>
-  <script src="{{asset('style/node_modules/datatables.net-select-bs4/js/select.bootstrap4.min.js')}}"></script>
-  <script src="{{asset('style/node_modules/izitoast/dist/js/iziToast.min.js')}}"></script>
+  <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+  {{-- <script src="{{asset('style/node_modules/izitoast/dist/js/iziToast.min.js')}}"></script> --}}
   <script src="{{ asset('style/assets/js/page/modules-toastr.js') }}"></script>
   <!-- Template JS File -->
   <script src="{{ asset('style/assets/js/scripts.js') }}"></script>
   <script src="{{ asset('style/assets/js/custom.js') }}"></script>
-  <script src="{{asset('style/assets/js/page/modules-datatables.js')}}"></script>
+  {{-- <script src="{{asset('style/assets/js/page/modules-datatables.js')}}"></script> --}}
   <!-- Page Specific JS File -->
 </body>
 </html>

@@ -1,6 +1,6 @@
 @extends('layouts.temp')
 @section('title')
-Lihat Laporan 
+Lihat Laporan
 @endsection
 @section('breadcrumb')
 <div class="section-header-breadcrumb">
@@ -22,13 +22,18 @@ Lihat Laporan
               <a href="{{url('KelolaLaporan')}}" class="btn btn-secondary">Kembali</a>
             </div>
           </div>
+          @if(session('error'))
+                <div class="alert alert-danger">
+                    {{ session('error') }}
+                </div>
+          @endif
           <div class="card-body">
             @if(auth()->user()->role == 3)
             <button class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">Buat Laporan Ke Excel</button>
             <a href="{{url('KelolaLaporan/create')}}" class="btn btn-primary">Tambah Data Laporan</a>
             @endif
             <div class="table-responsive">
-              <table class="table table-striped" id="table-1">
+              <table class="table table-striped" id="myTable">
                 <thead>
                  <tr>
                   <th>NO</th>
@@ -60,13 +65,13 @@ Lihat Laporan
                   <td>{{$element->achrev}}%</td>
                   <td>{{$element->created_at->format('j F, Y')}}</td>
                   @if(auth()->user()->role == 3)
-                  <th>
-                     <a href="{{ url('KelolaLaporan/'.$element->id.'/edit') }}" class="btn btn-success"><i class="fa fa-edit"></i>Edit</a>
+                  <th style="display: contents;">
+                     <a href="{{ url('KelolaLaporan/'.$element->id.'/edit') }}" class="btn btn-success"><i class="fa fa-edit"></i></a>
                     <form action="{{ url('KelolaLaporan/'.$element->id) }}" method="post" class="d-inline" onsubmit="return confirm('Yakin hapus data?')">
                   @method('delete')
                   @csrf
                   <button type="submit" class="btn btn-danger">
-                    <i class="fa fa-trash"></i>Hapus
+                    <i class="fa fa-trash"></i>
                   </button>
                   </th>
                 </form>
@@ -114,5 +119,11 @@ Lihat Laporan
 </div>
 </div>
 @include('sweetalert::alert')
-
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap.min.js"></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#myTable').DataTable();
+    });
+</script>
 @endsection

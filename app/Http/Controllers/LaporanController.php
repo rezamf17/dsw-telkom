@@ -72,7 +72,7 @@ class LaporanController extends Controller
          $laporan->tgtmtd = $tgtmtd;
          $laporan->realmtd = $realmtd;
          $laporan->ach = $realmtd / $tgtmtd * 100;
-         $laporan->shrtge = $tgtmtd - $realmtd; 
+         $laporan->shrtge = $tgtmtd - $realmtd;
          $laporan->tgtrev = $tgtrev;
          $laporan->progrev = $progrev;
          $laporan->achrev = $progrev / $tgtrev * 100;
@@ -143,7 +143,7 @@ class LaporanController extends Controller
          $laporan->tgtmtd = $tgtmtd;
          $laporan->realmtd = $realmtd;
          $laporan->ach = $realmtd / $tgtmtd * 100;
-         $laporan->shrtge = $tgtmtd - $realmtd; 
+         $laporan->shrtge = $tgtmtd - $realmtd;
          $laporan->tgtrev = $tgtrev;
          $laporan->progrev = $progrev;
          $laporan->achrev = $progrev / $tgtrev * 100;
@@ -168,14 +168,14 @@ class LaporanController extends Controller
 
     public function viewExport(Request $request, $id)
     {
-        $validator = Validator::make($request->all(), [
-        'time' => 'required|exists:kelola_produk,created_at',
-        ]);
+        // $validator = Validator::make($request->all(), [
+        // 'time' => 'required|not_exists:kelola_produk,created_at',
+        // ]);
 
-        if ($validator->fails()) {
-        return back()->with('errors', $validator->messages()->all()[0])->withInput();
-        }
-        
+        // if ($validator->fails()) {
+        // return back()->with('error', 'Data Laporan Tidak Ada');
+        // }
+
         $time = $request->time;
         $laporan_query = DB::table('kelola_laporan')
                 ->select('id_nama_produk', 'witel', 'tgtmtd', 'realmtd', 'ach', 'shrtge', 'tgtrev', 'progrev', 'achrev')
@@ -186,21 +186,24 @@ class LaporanController extends Controller
                 ->where('created_at', $time)
                 ->where('witel', 'not like', 'TREG%')
                 ->get();
+        if ($laporan_query->isEmpty()) {
+            return back()->with('error', 'Data Laporan Tidak Ada');
+        }
         $nama = Laporan::where('id_nama_produk', $id)->first();
         $laporan_id = Laporan::where('id_nama_produk', $id)->first();
         $sumtgtmtd =  Laporan::where('id_nama_produk', $id)->where('created_at', $time)->sum('tgtmtd');
         $sumrealmtd =  Laporan::where('id_nama_produk', $id)->where('created_at', $time)->sum('realmtd');
-        $sumach = round($sumtgtmtd / $sumrealmtd * 100); 
+        $sumach = round($sumtgtmtd / $sumrealmtd * 100);
         $sumtgtrev = Laporan::where('id_nama_produk', $id)->where('created_at', $time)->sum('tgtrev');
         $sumprogrev = Laporan::where('id_nama_produk', $id)->where('created_at', $time)->sum('progrev');
         $sumachrev = round($sumtgtrev / $sumprogrev * 100);
         return view ('manager.ViewExport', compact(
             'laporan_query',
             'nama',
-            'time', 
-            'sumtgtmtd', 
-            'sumrealmtd', 
-            'sumach', 
+            'time',
+            'sumtgtmtd',
+            'sumrealmtd',
+            'sumach',
             'sumtgtrev',
             'sumprogrev',
             'sumachrev',
@@ -223,7 +226,7 @@ class LaporanController extends Controller
         $laporan_id = Laporan::where('id_nama_produk', $id)->first();
         $sumtgtmtd =  Laporan::where('id_nama_produk', $id)->where('created_at', $time)->sum('tgtmtd');
         $sumrealmtd =  Laporan::where('id_nama_produk', $id)->where('created_at', $time)->sum('realmtd');
-        $sumach = round($sumtgtmtd / $sumrealmtd * 100); 
+        $sumach = round($sumtgtmtd / $sumrealmtd * 100);
         $sumtgtrev = Laporan::where('id_nama_produk', $id)->where('created_at', $time)->sum('tgtrev');
         $sumprogrev = Laporan::where('id_nama_produk', $id)->where('created_at', $time)->sum('progrev');
         $sumachrev = round($sumtgtrev / $sumprogrev * 100);
@@ -231,10 +234,10 @@ class LaporanController extends Controller
         // return view ('manager.LaporanReport', compact(
         //     'laporan_query',
         //     'nama',
-        //     'time', 
-        //     'sumtgtmtd', 
-        //     'sumrealmtd', 
-        //     'sumach', 
+        //     'time',
+        //     'sumtgtmtd',
+        //     'sumrealmtd',
+        //     'sumach',
         //     'sumtgtrev',
         //     'sumprogrev',
         //     'sumachrev',
