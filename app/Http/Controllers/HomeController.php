@@ -28,7 +28,8 @@ class HomeController extends Controller
         $user_count = User::all()->count();
         $admin_count = User::where('role', 1)->count();
         $staff_count = User::where('role', 3)->count();
+        $manager_count = User::where('role', 2)->count();
         $target_count = Target::all()->count();
-        return view('home', compact('user_count', 'admin_count', 'staff_count', 'target_count'));
+        return view('home', compact('user_count', 'admin_count', 'staff_count', 'target_count', 'manager_count'));
     }
 }

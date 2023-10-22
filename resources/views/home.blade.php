@@ -51,24 +51,39 @@ Dashboard Admin
             </div>
             <div class="col-lg-3 col-md-6 col-sm-6 col-12">
               <div class="card card-statistic-1">
-                <div class="card-icon bg-success">
-                  <i class="fas fa-bullseye"></i>
+                <div class="card-icon bg-secondary">
+                  <i class="fas fa-user"></i>
                 </div>
                 <div class="card-wrap">
                   <div class="card-header">
-                    <h4>Total Data Target</h4>
+                    <h4>Total Manager</h4>
                   </div>
                   <div class="card-body">
-                    {{$target_count}}
+                    {{$manager_count}}
                   </div>
                 </div>
               </div>
             </div>
+            <div class="col-lg-3 col-md-6 col-sm-6 col-12">
+                <div class="card card-statistic-1">
+                  <div class="card-icon bg-success">
+                    <i class="fas fa-bullseye"></i>
+                  </div>
+                  <div class="card-wrap">
+                    <div class="card-header">
+                      <h4>Total Data Target</h4>
+                    </div>
+                    <div class="card-body">
+                      {{$target_count}}
+                    </div>
+                  </div>
+                </div>
+            </div>
             <div class="card-body">
                 <div class="row">
-                    <div class="col">
+                    {{-- <div class="col">
                         <canvas id="pieChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
-                    </div>
+                    </div> --}}
                     <div class="col">
                         <canvas id="donutChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
                     </div>
@@ -94,17 +109,19 @@ Dashboard Admin
     var donutChartCanvas = $('#donutChart').get(0).getContext('2d')
     var akunData = {
       labels: [
-        'On-Going',
-        'Hold',
-        'Finish',
+        'Admin',
+        'Staff',
+        'Manager',
+        'Target'
       ],
       datasets: [{
         data: [
-          1,
-          2,
-          3
+          {{$admin_count}},
+          {{$staff_count}},
+          {{$manager_count}},
+          {{$target_count}}
         ],
-        backgroundColor: ['#f39c12', '#f56954', '#00a65a'],
+        backgroundColor: ['#fc544b', '#ffa426', '#cdd3d8', '#47c363'],
       }]
     }
     var donutOptions = {
@@ -118,24 +135,6 @@ Dashboard Admin
       data: akunData,
       options: donutOptions
     })
-
-    var proyekData = {
-      labels: [
-        'Admin',
-        'Pegawai',
-        'PJ Proyek',
-        'Member Proyek',
-      ],
-      datasets: [{
-        data: [
-          1,
-          2,
-          3,
-          4
-        ],
-        backgroundColor: ['#00a65a', '#f39c12', '#f56954', '#007bff'],
-      }]
-    }
 
     //-------------
     //- PIE CHART -
