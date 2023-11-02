@@ -22,6 +22,11 @@ Lihat Produk
               <a href="{{url('KelolaProduk')}}" class="btn btn-secondary">Kembali</a>
             </div>
           </div>
+          @if(session('error'))
+          <div class="alert alert-danger">
+              {{ session('error') }}
+          </div>
+          @endif
           <div class="card-body">
             <button class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">Buat Laporan</button>
             <a href="{{url('KelolaProduk/create')}}" class="btn btn-primary">Tambah Data Produk</a>
@@ -56,13 +61,13 @@ Lihat Produk
                   <td>{{$element->progrev}}</td>
                   <td>{{$element->achrev}}%</td>
                   <td>{{$element->created_at->format('j F, Y')}}</td>
-                  <th>
-                     <a href="{{ url('KelolaProduk/'.$element->id.'/edit') }}" title="" class="btn btn-success"><i class="fa fa-edit"></i>Edit</a>
+                  <th style="display: contents;">
+                     <a href="{{ url('KelolaProduk/'.$element->id.'/edit') }}" title="" class="btn btn-success"><i class="fa fa-edit"></i></a>
                     <form action="{{ url('KelolaProduk/'.$element->id) }}" method="post" class="d-inline" onsubmit="return confirm('Yakin hapus data?')">
                   @method('delete')
                   @csrf
                   <button type="submit" class="btn btn-danger">
-                    <i class="fa fa-trash"></i>Hapus
+                    <i class="fa fa-trash"></i>
                   </button>
                   </th>
                 </form>
